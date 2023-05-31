@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D974D7D92A270F7900B25CB0 /* Area_Book___RM_EditionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974D7D82A270F7900B25CB0 /* Area_Book___RM_EditionApp.swift */; };
+		D974D7DB2A270F7900B25CB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974D7DA2A270F7900B25CB0 /* ContentView.swift */; };
+		D974D7DD2A270F7A00B25CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D974D7DC2A270F7A00B25CB0 /* Assets.xcassets */; };
+		D974D7E02A270F7A00B25CB0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D974D7DF2A270F7A00B25CB0 /* Preview Assets.xcassets */; };
+		D974D7EA2A270F7A00B25CB0 /* Area_Book___RM_EditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974D7E92A270F7A00B25CB0 /* Area_Book___RM_EditionTests.swift */; };
+		D974D7F42A270F7A00B25CB0 /* Area_Book___RM_EditionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974D7F32A270F7A00B25CB0 /* Area_Book___RM_EditionUITests.swift */; };
+		D974D7F62A270F7A00B25CB0 /* Area_Book___RM_EditionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974D7F52A270F7A00B25CB0 /* Area_Book___RM_EditionUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D974D7E62A270F7A00B25CB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D974D7CD2A270F7900B25CB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D974D7D42A270F7900B25CB0;
+			remoteInfo = "Area Book - RM Edition";
+		};
+		D974D7F02A270F7A00B25CB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D974D7CD2A270F7900B25CB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D974D7D42A270F7900B25CB0;
+			remoteInfo = "Area Book - RM Edition";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D974D7D52A270F7900B25CB0 /* Area Book - RM Edition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Area Book - RM Edition.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D974D7D82A270F7900B25CB0 /* Area_Book___RM_EditionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area_Book___RM_EditionApp.swift"; sourceTree = "<group>"; };
+		D974D7DA2A270F7900B25CB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D974D7DC2A270F7A00B25CB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D974D7DF2A270F7A00B25CB0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D974D7E52A270F7A00B25CB0 /* Area Book - RM EditionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Area Book - RM EditionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D974D7E92A270F7A00B25CB0 /* Area_Book___RM_EditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area_Book___RM_EditionTests.swift"; sourceTree = "<group>"; };
+		D974D7EF2A270F7A00B25CB0 /* Area Book - RM EditionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Area Book - RM EditionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D974D7F32A270F7A00B25CB0 /* Area_Book___RM_EditionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area_Book___RM_EditionUITests.swift"; sourceTree = "<group>"; };
+		D974D7F52A270F7A00B25CB0 /* Area_Book___RM_EditionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area_Book___RM_EditionUITestsLaunchTests.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D974D7D22A270F7900B25CB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D974D7E22A270F7A00B25CB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D974D7EC2A270F7A00B25CB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D974D7CC2A270F7900B25CB0 = {
+			isa = PBXGroup;
+			children = (
+				D974D7D72A270F7900B25CB0 /* Area Book - RM Edition */,
+				D974D7E82A270F7A00B25CB0 /* Area Book - RM EditionTests */,
+				D974D7F22A270F7A00B25CB0 /* Area Book - RM EditionUITests */,
+				D974D7D62A270F7900B25CB0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D974D7D62A270F7900B25CB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D974D7D52A270F7900B25CB0 /* Area Book - RM Edition.app */,
+				D974D7E52A270F7A00B25CB0 /* Area Book - RM EditionTests.xctest */,
+				D974D7EF2A270F7A00B25CB0 /* Area Book - RM EditionUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D974D7D72A270F7900B25CB0 /* Area Book - RM Edition */ = {
+			isa = PBXGroup;
+			children = (
+				D974D7D82A270F7900B25CB0 /* Area_Book___RM_EditionApp.swift */,
+				D974D7DA2A270F7900B25CB0 /* ContentView.swift */,
+				D974D7DC2A270F7A00B25CB0 /* Assets.xcassets */,
+				D974D7DE2A270F7A00B25CB0 /* Preview Content */,
+			);
+			path = "Area Book - RM Edition";
+			sourceTree = "<group>";
+		};
+		D974D7DE2A270F7A00B25CB0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D974D7DF2A270F7A00B25CB0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D974D7E82A270F7A00B25CB0 /* Area Book - RM EditionTests */ = {
+			isa = PBXGroup;
+			children = (
+				D974D7E92A270F7A00B25CB0 /* Area_Book___RM_EditionTests.swift */,
+			);
+			path = "Area Book - RM EditionTests";
+			sourceTree = "<group>";
+		};
+		D974D7F22A270F7A00B25CB0 /* Area Book - RM EditionUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D974D7F32A270F7A00B25CB0 /* Area_Book___RM_EditionUITests.swift */,
+				D974D7F52A270F7A00B25CB0 /* Area_Book___RM_EditionUITestsLaunchTests.swift */,
+			);
+			path = "Area Book - RM EditionUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D974D7D42A270F7900B25CB0 /* Area Book - RM Edition */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D974D7F92A270F7A00B25CB0 /* Build configuration list for PBXNativeTarget "Area Book - RM Edition" */;
+			buildPhases = (
+				D974D7D12A270F7900B25CB0 /* Sources */,
+				D974D7D22A270F7900B25CB0 /* Frameworks */,
+				D974D7D32A270F7900B25CB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Area Book - RM Edition";
+			productName = "Area Book - RM Edition";
+			productReference = D974D7D52A270F7900B25CB0 /* Area Book - RM Edition.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D974D7E42A270F7A00B25CB0 /* Area Book - RM EditionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D974D7FC2A270F7A00B25CB0 /* Build configuration list for PBXNativeTarget "Area Book - RM EditionTests" */;
+			buildPhases = (
+				D974D7E12A270F7A00B25CB0 /* Sources */,
+				D974D7E22A270F7A00B25CB0 /* Frameworks */,
+				D974D7E32A270F7A00B25CB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D974D7E72A270F7A00B25CB0 /* PBXTargetDependency */,
+			);
+			name = "Area Book - RM EditionTests";
+			productName = "Area Book - RM EditionTests";
+			productReference = D974D7E52A270F7A00B25CB0 /* Area Book - RM EditionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D974D7EE2A270F7A00B25CB0 /* Area Book - RM EditionUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D974D7FF2A270F7A00B25CB0 /* Build configuration list for PBXNativeTarget "Area Book - RM EditionUITests" */;
+			buildPhases = (
+				D974D7EB2A270F7A00B25CB0 /* Sources */,
+				D974D7EC2A270F7A00B25CB0 /* Frameworks */,
+				D974D7ED2A270F7A00B25CB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D974D7F12A270F7A00B25CB0 /* PBXTargetDependency */,
+			);
+			name = "Area Book - RM EditionUITests";
+			productName = "Area Book - RM EditionUITests";
+			productReference = D974D7EF2A270F7A00B25CB0 /* Area Book - RM EditionUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D974D7CD2A270F7900B25CB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D974D7D42A270F7900B25CB0 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					D974D7E42A270F7A00B25CB0 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = D974D7D42A270F7900B25CB0;
+					};
+					D974D7EE2A270F7A00B25CB0 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = D974D7D42A270F7900B25CB0;
+					};
+				};
+			};
+			buildConfigurationList = D974D7D02A270F7900B25CB0 /* Build configuration list for PBXProject "Area Book - RM Edition" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D974D7CC2A270F7900B25CB0;
+			productRefGroup = D974D7D62A270F7900B25CB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D974D7D42A270F7900B25CB0 /* Area Book - RM Edition */,
+				D974D7E42A270F7A00B25CB0 /* Area Book - RM EditionTests */,
+				D974D7EE2A270F7A00B25CB0 /* Area Book - RM EditionUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D974D7D32A270F7900B25CB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D974D7E02A270F7A00B25CB0 /* Preview Assets.xcassets in Resources */,
+				D974D7DD2A270F7A00B25CB0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D974D7E32A270F7A00B25CB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D974D7ED2A270F7A00B25CB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D974D7D12A270F7900B25CB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D974D7DB2A270F7900B25CB0 /* ContentView.swift in Sources */,
+				D974D7D92A270F7900B25CB0 /* Area_Book___RM_EditionApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D974D7E12A270F7A00B25CB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D974D7EA2A270F7A00B25CB0 /* Area_Book___RM_EditionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D974D7EB2A270F7A00B25CB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D974D7F62A270F7A00B25CB0 /* Area_Book___RM_EditionUITestsLaunchTests.swift in Sources */,
+				D974D7F42A270F7A00B25CB0 /* Area_Book___RM_EditionUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D974D7E72A270F7A00B25CB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D974D7D42A270F7900B25CB0 /* Area Book - RM Edition */;
+			targetProxy = D974D7E62A270F7A00B25CB0 /* PBXContainerItemProxy */;
+		};
+		D974D7F12A270F7A00B25CB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D974D7D42A270F7900B25CB0 /* Area Book - RM Edition */;
+			targetProxy = D974D7F02A270F7A00B25CB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D974D7F72A270F7A00B25CB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D974D7F82A270F7A00B25CB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D974D7FA2A270F7A00B25CB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Area Book - RM Edition/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "spencer.chavez.Area-Book---RM-Edition";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D974D7FB2A270F7A00B25CB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Area Book - RM Edition/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "spencer.chavez.Area-Book---RM-Edition";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D974D7FD2A270F7A00B25CB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "spencer.chavez.Area-Book---RM-EditionTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Area Book - RM Edition.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Area Book - RM Edition";
+			};
+			name = Debug;
+		};
+		D974D7FE2A270F7A00B25CB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "spencer.chavez.Area-Book---RM-EditionTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Area Book - RM Edition.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Area Book - RM Edition";
+			};
+			name = Release;
+		};
+		D974D8002A270F7A00B25CB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "spencer.chavez.Area-Book---RM-EditionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Area Book - RM Edition";
+			};
+			name = Debug;
+		};
+		D974D8012A270F7A00B25CB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "spencer.chavez.Area-Book---RM-EditionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Area Book - RM Edition";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D974D7D02A270F7900B25CB0 /* Build configuration list for PBXProject "Area Book - RM Edition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D974D7F72A270F7A00B25CB0 /* Debug */,
+				D974D7F82A270F7A00B25CB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D974D7F92A270F7A00B25CB0 /* Build configuration list for PBXNativeTarget "Area Book - RM Edition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D974D7FA2A270F7A00B25CB0 /* Debug */,
+				D974D7FB2A270F7A00B25CB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D974D7FC2A270F7A00B25CB0 /* Build configuration list for PBXNativeTarget "Area Book - RM EditionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D974D7FD2A270F7A00B25CB0 /* Debug */,
+				D974D7FE2A270F7A00B25CB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D974D7FF2A270F7A00B25CB0 /* Build configuration list for PBXNativeTarget "Area Book - RM EditionUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D974D8002A270F7A00B25CB0 /* Debug */,
+				D974D8012A270F7A00B25CB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D974D7CD2A270F7900B25CB0 /* Project object */;
+}
