@@ -1,12 +1,12 @@
-//___FILEHEADER___
-
 import SwiftUI
 
 @main
-struct ___PACKAGENAME:identifier___App: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+struct App {
+    static func main () {
+        var body: some Scene {
+            WindowGroup {
+                ContentView()
+            }
         }
     }
 }
