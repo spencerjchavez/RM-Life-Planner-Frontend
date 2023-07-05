@@ -11,7 +11,7 @@ struct ContentView: View {
     @State private var desiresAndGoalsView: AnyView = AnyView(DesiresAndGoalsView())
     @State private var calendarView: AnyView
     @State private var peopleView = AnyView(CalendarView(isSelected: true))
-    @State private var profileView = AnyView(ProfileView())
+    @State private var settingsView = AnyView(SettingsView())
     @State private var focusedView: AnyView
 
     init() {
@@ -20,7 +20,8 @@ struct ContentView: View {
         _calendarView = State(initialValue: initialCalendarView)
     }
     var body: some View {
-        focusedView.scaledToFit()
+        focusedView
+        //.scaledToFill()
         Spacer()
         CustomNavView(
             toDesiresAndGoalsView: focusDesiresAndGoalsView,
@@ -38,7 +39,7 @@ struct ContentView: View {
         focusedView = peopleView
     }
     public func focusProfileView() {
-        focusedView = profileView
+        focusedView = settingsView
     }
 }
 

@@ -33,7 +33,7 @@ struct CustomNavView: View {
             Button(action: {
                 toProfileView()
             }){
-                Text("Profile") // TODO: make nav buttons have pretty icons
+                Text("Settings") // TODO: make nav buttons have pretty icons
             }
         }
     }

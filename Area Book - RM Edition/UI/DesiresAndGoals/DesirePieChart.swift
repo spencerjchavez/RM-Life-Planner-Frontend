@@ -19,64 +19,52 @@ struct DesirePieChart: View {
         var i = 0
         for category in categories {
             let progress_angle = base_angle - angle + (angle * category.progress)
-            let color = Color(red: category.colorR, green: category.colorG, blue: category.colorB)
-            pie_sections.append((CustomPieSection(angle: Angle(degrees: base_angle), color: color), CustomPieSection(angle: Angle(degrees: progress_angle), color: color)))
+            pie_sections.append((CustomPieSection(angle: Angle(degrees: base_angle), color: category.color), CustomPieSection(angle: Angle(degrees: progress_angle), color: category.color)))
             base_angle -= angle
             totalProgress += category.progress / Double(categories.count)
             i += 1
         }
     }
     
-    
     var body: some View {
-        VStack(alignment: .center) {
-            Spacer(minLength: 20)
-            Text("THIS WEEK'S PROGRESS")
-                .foregroundColor(.black)
-                .font(.title)
-            ZStack(alignment: .center) {
-                ForEach(pie_sections.indices, id: \.self) { index in
-                    let (base_section, progress_section) = pie_sections[index]
-                    base_section
-                        .fill(base_section.color)
-                        .brightness(0.50)
-                    progress_section
-                        .fill(progress_section.color)
-                    CustomPieSection(angle: Angle(degrees: angle * Double(categories.count - index - 1)), color: .white)
-                        .fill(.white)
-                }.mask(Circle())
-                Circle()
-                    .padding(80)
-                    .foregroundColor(.white)
-                VStack{
-                    Text(Int((totalProgress * 100).rounded()).description + "%")
-                        .foregroundColor(.black)
-                        .font(Font.custom("Helvetica-Bold", size: 32))
-                    Text("completed")
-                        .foregroundColor(.black)
-                        .font(.title)
-                }
+        ZStack(alignment: .center) {
+            ForEach(pie_sections.indices, id: \.self) { index in
+                let (base_section, progress_section) = pie_sections[index]
+                base_section
+                    .fill(base_section.color)
+                    .brightness(0.45)
+                progress_section
+                    .fill(progress_section.color)
+                base_section.stroke(.black, lineWidth: 2.5)
+            }.mask(Circle())
+            Circle()
+                .stroke(.black, lineWidth: 2.5)
+            Circle()
+                .padding(70)
+                .foregroundColor(.white)
+            Circle()
+                .stroke(.black, lineWidth: 2.5)
+                .padding(70)
+            VStack{
+                Text(Int((totalProgress * 100).rounded()).description + "%")
+                    .foregroundColor(.black)
+                    .font(Font.custom("Helvetica-Bold", size: 32))
+                Text("completed")
+                    .foregroundColor(.black)
+                    .font(.title)
             }
-            .scaledToFill()
-            ForEach(categories.indices) { i in
-                HStack (){
-                    Rectangle()
-                        .fill(pie_sections[i].0.color)
-                        .aspectRatio(1.0, contentMode: .fit)
-                        .fixedSize()
-                    Text(Int((categories[i].progress * 100).rounded()).description + "% - " +  categories[i].name)
-                    Spacer()
-                }
-                .font(.body)
-            }
-            Spacer()
-        }.padding()
+        }
+        .scaledToFill()
     }
 }
-struct CustomPieSection: Shape, Identifiable, Hashable {
-    let id: UUID = UUID()
+struct CustomPieSection: Shape{
     var angle: Angle
     var color: Color
+    
+    init(angle: Angle, color: Color) {
+        self.angle = angle
+        self.color = color
+    }
 
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -145,12 +133,5 @@ struct CustomPieSection: Shape, Identifiable, Hashable {
             path.addLine(to: CGPoint(x: rect.midX, y: rect.midY))
         }
         return path
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(angle)
-    }
-    // Implement the equality operator (==)
-    static func ==(lhs: CustomPieSection, rhs: CustomPieSection) -> Bool {
-        return lhs.angle == rhs.angle
     }
 }
