@@ -6,13 +6,19 @@ struct CalendarDayView: View {
     // 1. events with the earliest startInstant are first
     // 2. if both share the same startInstant, events with the latest endInstant are first
     // 3. if both events share the same startInstant and endInstant, the event with the lowest eventId is first
+    let eventsXOffset = 50.0
+    @State var eventsYOffset = 0.0
+    @State var eventsRenderWidth = 0.0
+    @State var eventsRenderHeight = 1500.0
+    @State var eventHeightPerSecond = 0.0
     
     var day: Double
-    var eventsManager: CalendarEventsManager
+    @EnvironmentObject var eventsManager: CalendarEventsManager
+    //@State var eventsWithBounds: [CalendarEventWithBounds] = []
+    //var eventViews: [CalendarEventView] = []
+    @State var eventBounds: [Int: CGRect] = [:] // by eventId
+    //@ObservedObject var eventRects = EventRects()
     
-    @State var eventViewsManager: CalendarEventViewsManager?
-    //@State var eventRects: [[[CalendarEventWithBounds]]] = [] // [row][column][index in column
-
     @State var editingCalendarEventWindowActive: Bool = false
     @State var editingCalendarEventId: Int = -1
     //@State var editingCalendarEventListener: (_ event: CalendarEvent) -> Void
@@ -35,8 +41,8 @@ struct CalendarDayView: View {
                 ScrollViewReader{ reader in
                     ZStack() {
                         Color.clear
-                        Rectangle()
-                            .fill(.red.opacity(0.5))
+                        Rectangle() //user to capture drop events
+                            .fill(.white)
                             .frame(width: globalGeometry.size.width, height: eventsRenderHeight)
                             .onDrop(of: [.url], delegate: CalendarDayViewEventDropDelegate(eventsManager: eventsManager, isProposingDrop: $isProposingDrop, proposedNewStartInstant: $proposedNewStartInstant, day: day, yOffSet: eventsYOffset, maxY: eventsRenderHeight))
                         ForEach(0..<24, id: \.self) { hour in
@@ -53,7 +59,29 @@ struct CalendarDayView: View {
                             
                         }
                         
-                        eventViewsManager?.getCalendarViews()
+                        ForEach(eventsManager.getEventsOnDay(day: Int(day)), id: \.eventId) { event in
+                            let bounds = eventBounds[event.eventId] ?? .zero
+                            CalendarEventView(event: event)
+                                .frame(width: bounds.width,
+                                       height: bounds.height,
+                                       alignment: .center)
+                                 .position(x: bounds.midX,
+                                           y: bounds.midY)
+                                 .onTapGesture {
+                                     startEditCalendarEventWindow(eventId: event.eventId)
+                                 }
+                                 .onDrag{
+                                     self.eventsManager.eventIdToDrop = event.eventId
+                                     return NSItemProvider(contentsOf: URL(string: event.eventId.description))!
+                                  } preview: {
+                                      CalendarEventView(event: event)
+                                          .frame(width: bounds.width, height: bounds.height, alignment: .center)
+                                 }
+                        }
+                        .allowsHitTesting(!isProposingDrop)
+                        .onChange(of: eventsManager.eventsByDay) { _ in
+                            calculateEventRects()
+                        }
                         
                         //drop preview time view
                         if isProposingDrop {
@@ -72,17 +100,12 @@ struct CalendarDayView: View {
                         GeometryReader { geometry in
                             Color.clear.onAppear {
                                 reader.scrollTo(0, anchor: .top)
-                                
-                                let eventsXOffset = 50.0
-                                let eventsRenderHeight = 1500.0
-                                let eventsRenderWidth = geometry.size.width - eventsXOffset
-                                let eventHeightPerSecond = eventsRenderHeight / 25.0 / 60.0 / 60.0
-                                let eventsYOffset = eventHeightPerSecond * 60 * 60 / 2.0
-                                
+                                eventsRenderWidth = geometry.size.width - eventsXOffset
+                                eventHeightPerSecond = eventsRenderHeight / 25.0 / 60.0 / 60.0
+                                eventsYOffset = eventHeightPerSecond * 60 * 60 / 2.0
                                 //print("x-off: \(eventsXOffset)")
                                 //print("heightPerSecond: \(eventHeightPerSecond)")
-                                eventViewsManager = CalendarEventViewsManager(day: day, eventsManager: eventsManager, eventsRenderWidth: eventsRenderWidth, eventsRenderHeight: eventsRenderHeight, eventsXOffset: eventsXOffset, eventsYOffset: eventsYOffset, eventHeightPerSecond: eventHeightPerSecond)
-                                eventViewsManager?.calculateEventRects()
+                                calculateEventRects()
                                 reader.scrollTo(6, anchor: .top)
                             }
                         }
@@ -91,8 +114,63 @@ struct CalendarDayView: View {
             }
         }
     }
-    func refreshEventViews() {
-        eventViewsManager?.calculateEventRects()
+    func calculateEventRects() {
+        // calculate rectangles
+        print("recalculate the bounds")
+        var eventRects: [[[CalendarEvent]]] = []
+        var currRow = -1 // will be changed to 0 as it enters the for loop
+        var maxEndInstantInRow = (0,0.0) //index , value
+        var minEndInstantInRow = (0,0.0) //index , value
+        let events = eventsManager.getEventsOnDay(day: Int(day))
+        for event in events {
+            //event is guaranteed that:
+            //it will start before all the events after it
+            //it will end after all the following events if they share a start time
+            //it has the lowest eventId if they share start times and end times
+            if event.startInstant < maxEndInstantInRow.1 {
+                //event adds a new event into the current row, update other events in row too
+                if event.startInstant > minEndInstantInRow.1 {
+                    //put event under an event that ends before it
+                    eventRects[currRow][minEndInstantInRow.0].append(event)
+                } else {
+                    //add event to end of row in a new column
+                    eventRects[currRow].append([event,])
+                }
+            } else {
+                //new row created
+                currRow += 1
+                eventRects.append([[event,]])
+            }
+            //update max and min end instants
+            maxEndInstantInRow = (0, 0.0)
+            minEndInstantInRow = (0, Double.infinity)
+            var col_i = 0
+            for col in eventRects[currRow] {
+                if col.last!.endInstant > maxEndInstantInRow.1 {
+                    maxEndInstantInRow = (col_i, col.last!.endInstant)
+                }
+                if col.last!.endInstant < minEndInstantInRow.1 {
+                    minEndInstantInRow = (col_i, col.last!.endInstant)
+                }
+                col_i += 1
+            }
+        }
+        // calculate bounds of each eventRect
+        for row in eventRects.indices {
+            let width = eventsRenderWidth / Double(eventRects[row].count)
+            for col in eventRects[row].indices {
+                for i in eventRects[row][col].indices {
+                    let event = eventRects[row][col][i]
+                    let bounds = CGRect(
+                        x: CGFloat(col) * width + eventsXOffset,
+                        y: (event.startInstant - event.startDay) *  eventHeightPerSecond + eventsYOffset,
+                        width: width,
+                        height: (event.endInstant - event.startInstant) * eventHeightPerSecond)
+
+                    self.eventBounds[event.eventId] = bounds
+                }
+            }
+        }
     }
     func startEditCalendarEventWindow(eventId: Int) {
         if editingCalendarEventWindowActive { return }
@@ -102,40 +180,30 @@ struct CalendarDayView: View {
             editingCalendarEventWindowActive = false
         }
         
-        //let vc = EditCalendarEventView(eventId: eventId, eventsManager: eventsManager, _onSubmit: _onSubmit)
-        //vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-        //self.present(vc, animated: false, completion: nil)
-    }
-}
-extension CGRect : Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(minX)
-        hasher.combine(minY)
-        hasher.combine(width)
-        hasher.combine(height)
+        let vc = EditCalendarEventView(eventId: eventId, eventsManager: eventsManager)
+        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        self.present(vc, animated: false, completion: nil)
     }
 }
 struct CalendarEventWithBounds : Hashable {
     var event: CalendarEvent
-    var bounds: CGRect?
+    var bounds: CGRect
     
-    init(event: CalendarEvent, bounds: CGRect?) {
+    init(event: CalendarEvent, bounds: CGRect) {
         self.event = event
         self.bounds = bounds
     }
-    init(_ event: CalendarEvent, _ bounds: CGRect?) {
+    init(_ event: CalendarEvent, _ bounds: CGRect) {
         self.init(event: event, bounds: bounds)
     }
     static func == (lhs: CalendarEventWithBounds, rhs: CalendarEventWithBounds) -> Bool {
-        return lhs.event.eventId == rhs.event.eventId
+        return lhs.event.eventId == rhs.event.eventId && lhs.bounds == rhs.bounds
     }
     func hash(into hasher: inout Hasher) {
         hasher.combine(event)
         hasher.combine(bounds)
     }
 }
-
-
 class CalendarDayViewEventDropDelegate : NSObject, DropDelegate {
     //var eventIdToDrop: Int = -1
     @Binding var proposedNewStartInstant: Double
@@ -173,10 +241,16 @@ class CalendarDayViewEventDropDelegate : NSObject, DropDelegate {
     func dropUpdated(info: DropInfo) -> DropProposal? {
         isProposingDrop = true
         let y = info.location.y
-        //set proposedNewStartInstant to nearest 15-minute interval
         //print("y-value = \(y)")
         //y = seconds / 60 / 60 * (eventsRenderHeight / 25) + eventsYOffset)
-        proposedNewStartInstant = day + (y - yOffSet) / (maxY/25) * 60 * 60
+        var newStartInstant = day + (y - yOffSet) / (maxY/25) * 60 * 60
+        //round newStartInstant to nearest 15 minute interval
+        var date = Date(timeIntervalSince1970: newStartInstant)
+        var dc = Calendar.current.dateComponents([.minute], from: date)
+        var newMinute = round(Double(dc.minute ?? 0) / 15.0) * 15
+        
+        date = (Calendar.current.date(bySetting: .minute, value: 0, of: date)!.addingTimeInterval(TimeInterval(60 * newMinute)))
+        proposedNewStartInstant = date.timeIntervalSince1970
         return nil
     }
     
@@ -184,30 +258,3 @@ class CalendarDayViewEventDropDelegate : NSObject, DropDelegate {
         isProposingDrop = true
     }
 }
-
-
-/*class CalendarEventDropInfo : NSObject, Codable, NSItemProviderWriting {
-    var eventId: Int
-    var dropYValue: Int
-    
-    static var writableTypeIdentifiersForItemProvider: [String] {
-            return ["CalendarEventDropInfoObject"]
-        }
-
-        func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(self)
-                completionHandler(data, nil)
-            } catch {
-                completionHandler(nil, error)
-            }
-            return nil
-        }
-    }
-    init(_json: String){
-        let dict = JSONDecoder().decode(Dictionary, from: _json)
-        eventId = Int(dict["eventId"])
-        dropYValue = Int(dict["dropYValue"])
-    }
-} */

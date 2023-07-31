@@ -4,43 +4,27 @@
 //
 //  Created by spencer chavez on 6/26/23.
 //
-/*
+
 import SwiftUI
 
-class EditCalendarEventView: View {
+struct EditCalendarEventView: View {
     
     var eventId: Int
-    var eventsManager: CalendarEventsManager
-    var _onSubmit: (_ event: CalendarEvent) -> Void
+    @EnvironmentObject var eventsManager: CalendarEventsManager
     var goals: [Goal]
     var desires: [Desire]
     
-    var buttonSubmitText: String {"Save Changes"}
-    
-    enum RepeatPattern : CaseIterable, Identifiable {
-        case noRepeat
-        case repeatsDaily
-        case repeatsWeekly
-        case repeatsByDayOfMonth
-        case repeatsByWeekOfMonth
-        case repeatsYearly
-        case customRepeat
-        
-        var id: RepeatPattern { self }
-    }
     
     @State var eventTitle: String
     @State var eventDescription: String
     @State var eventStartDate: Date
     @State var eventEndDate: Date
     
-    @State var eventRepeatInterval: Int
-    @State var eventRepeatPattern: RepeatPattern
-    @State var eventRepeatDays = [false, false, false, false, false, false, false] //Sunday = 0, Saturday = 6
-    @State var eventRepeatDaysOfMonth: [Int]
-    @State var eventRepeatUntil: Int
+    @State var eventRepeatPattern: Recurrence.RepeatPattern?
+    @State var eventRepeatDays = [false, false, false, false, false, false, false]
+    @State var eventRepeatInterval: Int = 1
     
-    @State var linkedGoal: Int //goalId
+    @State var linkedGoalId: Int //goalId
     
     init() {
         
@@ -58,7 +42,7 @@ class EditCalendarEventView: View {
                 Text("From: ")
                 Text(eventStartDate.formatted(date: .omitted, time: .shortened))
                 if eventStartDate.formatted(date: .numeric, time: .omitted) != eventEndDate.formatted(date: .numeric, time: .omitted) {
-                    //start and end days are different
+                    //if start and end days are different
                     Text(eventStartDate.formatted(date: .abbreviated, time: .omitted))
                 }
                 Text("to: ")
@@ -69,7 +53,7 @@ class EditCalendarEventView: View {
                 Text("Repeats: ")
                 VStack {
                     Picker("Repeat Pattern", selection: $eventRepeatPattern) {
-                        ForEach(RepeatPattern.allCases) { pattern in
+                        /*ForEach(Recurrence.RepeatPattern.allCases) { pattern in
                             switch pattern {
                             case .noRepeat:
                                 Text("does not repeat")
@@ -95,7 +79,7 @@ class EditCalendarEventView: View {
                             case .customRepeat:
                                 Text("custom")
                             }
-                        }
+                        }*/
                     }.pickerStyle(.menu)
                     if eventRepeatPattern == .customRepeat {
                         VStack {
@@ -112,7 +96,7 @@ class EditCalendarEventView: View {
                             HStack {
                                 Text("every ")
                                 Picker("week interval", selection: $eventRepeatInterval) {
-                                    ForEach(1...6) { x in
+                                    ForEach(1..<7) { x in
                                         Text(x.description)
                                     }
                                 }
@@ -123,11 +107,11 @@ class EditCalendarEventView: View {
                 }
             }
             HStack {
-                Button {
+                Button(action: cancel){
                     Text("cancel")
                 }
-                Button(title: buttonSubmitText(), action: submit()){
-                    Text(buttonSubmitText())
+                Button(action: submit){
+                    Text("Done")
                 }
             }
         }
@@ -147,8 +131,13 @@ class EditCalendarEventView: View {
         }
         return suffix
     }
-    func submit() {
+    func cancel() {
         
     }
+    func submit() {
+        let event = CalendarEvent(eventId: eventId, usedId: userId, name: eventTitle, description: eventDescription, startInstant: eventStartDate.timeIntervalSince1970, endInstant: eventEndDate.timeIntervalSince1970, linkedGoalId: linkedGoalId, linkedTodoId: linkedTodoId, recurrenceId: recurrenceId)
+        Task(operation: {
+            await eventsManager.addEvent(event: event)
+        })
+    }
 }
-*/

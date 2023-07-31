@@ -3,12 +3,12 @@
 //  Area Book - RM Edition
 //
 //  Created by spencer chavez on 7/5/23.
-//
+//aaoeu
 
 import Foundation
 import SwiftUI
 
-class CalendarEventViewsManager : ObservableObject {
+/* class CalendarEventViewsManager : ObservableObject {
     
     var eventRects: [[[CalendarEventWithBounds]]] = [] // [row][column][index in column
     let eventsManager: CalendarEventsManager
@@ -109,3 +109,4 @@ class CalendarEventViewsManager : ObservableObject {
         self.objectWillChange.send() // update new CalendarEventViews
     }
 }
+*/

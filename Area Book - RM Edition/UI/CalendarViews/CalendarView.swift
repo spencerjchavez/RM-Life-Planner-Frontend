@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @EnvironmentObject var eventsManager: CalendarEventsManager
     @State var isSelected: Bool
     let calendarStyles = ["day", "week", "month"]
     @State var selectedOption = "day"
@@ -21,10 +22,10 @@ struct CalendarView: View {
         CalendarEvent(eventId: 4, name: "my first event!", startInstant: Date.now.timeIntervalSince1970),
         CalendarEvent(eventId: 5, name: "my second event is very cool, like me", startInstant: Date.now.addingTimeInterval(60 * 60 * 0.3).timeIntervalSince1970)]
     
-    var eventsManager: CalendarEventsManager
+    //var eventsManager: CalendarEventsManager
     init(isSelected: Bool) {
         self.isSelected = isSelected
-        self.eventsManager = try! CalendarEventsManager(events: events)
+        try! eventsManager.addEvents(events: events)
     }
     var body: some View {
         GeometryReader{ geometry in
@@ -92,24 +93,5 @@ struct CalendarView: View {
         }.onAppear{
             
         }
-    }
-}
-
-struct CalendarEventView : View, Hashable {
-    var event: CalendarEvent
-    var body: some View{
-        ZStack{
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.blue)
-            HStack {
-                Text(event.name)
-                    .padding()
-                Text(Date(timeIntervalSince1970: Double(event.startInstant)).formatted(date: .omitted, time: .shortened) + " - " + Date(timeIntervalSince1970: Double(event.endInstant)).formatted(date: .omitted, time: .shortened))
-                    .foregroundColor(.gray)
-            }
-        }
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(event)
     }
 }

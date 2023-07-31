@@ -10,9 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @State private var desiresAndGoalsView: AnyView = AnyView(DesiresAndGoalsView())
     @State private var calendarView: AnyView
-    @State private var peopleView = AnyView(CalendarView(isSelected: true))
+    @State private var peopleView = AnyView(DesiresAndGoalsView())
     @State private var settingsView = AnyView(SettingsView())
     @State private var focusedView: AnyView
+    
+    @StateObject var eventsManager = CalendarEventsManager()
 
     init() {
         let initialCalendarView = AnyView(CalendarView(isSelected: false))
@@ -21,7 +23,7 @@ struct ContentView: View {
     }
     var body: some View {
         focusedView
-        //.scaledToFill()
+            .environmentObject(eventsManager)
         Spacer()
         CustomNavView(
             toDesiresAndGoalsView: focusDesiresAndGoalsView,
