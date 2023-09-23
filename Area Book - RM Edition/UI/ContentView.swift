@@ -8,28 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var desiresAndGoalsView: AnyView = AnyView(DesiresAndGoalsView())
+    @StateObject private var appManager = RMLifePlannerManager()
+
+    @State private var desiresAndGoalsView: AnyView
     @State private var calendarView: AnyView
-    @State private var peopleView = AnyView(DesiresAndGoalsView())
-    @State private var settingsView = AnyView(SettingsView())
+    @State private var peopleView: AnyView
+    @State private var settingsView: AnyView
     @State private var focusedView: AnyView
-    
-    @StateObject var eventsManager = CalendarEventsManager()
 
     init() {
-        let initialCalendarView = AnyView(CalendarView(isSelected: false))
+        let initialCalendarView = AnyView(CalendarView())
         _focusedView = State(initialValue: initialCalendarView)
         _calendarView = State(initialValue: initialCalendarView)
+        _settingsView = State(initialValue: AnyView(SettingsView()))
+        _peopleView = State(initialValue: AnyView(SettingsView()))
+        _desiresAndGoalsView = State(initialValue: AnyView(MainProgressView()))
     }
     var body: some View {
-        focusedView
-            .environmentObject(eventsManager)
-        Spacer()
-        CustomNavView(
-            toDesiresAndGoalsView: focusDesiresAndGoalsView,
-            toCalendarView: focusCalendarView,
-            toPeopleView: focusPeopleView,
-            toProfileView: focusProfileView)
+        VStack {
+            focusedView
+            Spacer()
+            CustomNavView(
+                toDesiresAndGoalsView: focusDesiresAndGoalsView,
+                toCalendarView: focusCalendarView,
+                toPeopleView: focusPeopleView,
+                toProfileView: focusProfileView)
+        }
+        .environmentObject(appManager)
+
     }
     public func focusDesiresAndGoalsView() {
         focusedView = desiresAndGoalsView
@@ -57,11 +63,5 @@ struct YourApp: App {
         WindowGroup {
             ContentView()
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

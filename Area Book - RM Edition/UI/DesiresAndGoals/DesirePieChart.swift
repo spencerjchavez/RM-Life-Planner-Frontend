@@ -8,21 +8,18 @@
 import SwiftUI
 
 struct DesirePieChart: View {
-    var categories: [DesireCategory]
-    var angle: Double // in degrees
-    var totalProgress = 0.0
+    @EnvironmentObject var appManager: RMLifePlannerManager
+    let goalAchievingReport: GoalAchievingReport
     var pie_sections: [(CustomPieSection, CustomPieSection)] = []
-    init(categories: [DesireCategory]) {
-        self.categories = categories
-        angle = 360.0/Double(categories.count)
+    init(report: GoalAchievingReport) {
+        self.goalAchievingReport = report
+        let degreesPerDesire = 360.0/Double(goalAchievingReport.desires.count)
         var base_angle = 360.0
-        var i = 0
-        for category in categories {
-            let progress_angle = base_angle - angle + (angle * category.progress)
-            pie_sections.append((CustomPieSection(angle: Angle(degrees: base_angle), color: category.color), CustomPieSection(angle: Angle(degrees: progress_angle), color: category.color)))
-            base_angle -= angle
-            totalProgress += category.progress / Double(categories.count)
-            i += 1
+        for desire in goalAchievingReport.desires {
+            let progress_angle = base_angle - degreesPerDesire + (degreesPerDesire * (report.desiresProgress[desire.desireId] ?? 0))
+            let color = GlobalVars.userPreferences!.getColorOfPriority(desire.priorityLevel)
+            pie_sections.append((CustomPieSection(angle: Angle(degrees: base_angle), color: color), CustomPieSection(angle: Angle(degrees: progress_angle), color: color)))
+            base_angle -= degreesPerDesire
         }
     }
     
@@ -46,7 +43,7 @@ struct DesirePieChart: View {
                 .stroke(.black, lineWidth: 2.5)
                 .padding(70)
             VStack{
-                Text(Int((totalProgress * 100).rounded()).description + "%")
+                Text(Int((goalAchievingReport.totalProgress * 100).rounded()).description + "%")
                     .foregroundColor(.black)
                     .font(Font.custom("Helvetica-Bold", size: 32))
                 Text("completed")

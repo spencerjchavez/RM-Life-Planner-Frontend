@@ -15,26 +15,40 @@ struct CustomNavView: View {
 
     var body: some View{
         HStack{
+            Spacer()
             Button(action: {
                 toDesiresAndGoalsView()
             }){
-                Text("Desires and Goals") // TODO: make nav buttons have pretty icons
+                VStack {
+                    Image(systemName: "chart.bar")
+                    Text("Vision")
+                }
             }
+            Spacer()
             Button(action: {
                 toCalendarView()
+                
             }){
-                Text("Calendar") // TODO: make nav buttons have pretty icons
+                VStack {
+                    Image(systemName: "calendar")
+                    Text("Plan")
+                }
             }
-            Button(action: {
+            Spacer()
+            /*Button(action: {
                 toPeopleView()
             }){
-                Text("People") // TODO: make nav buttons have pretty icons
-            }
+                Text("People")
+            }*/
             Button(action: {
                 toProfileView()
             }){
-                Text("Settings") // TODO: make nav buttons have pretty icons
+                VStack {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
             }
+            Spacer()
         }
     }
 }
