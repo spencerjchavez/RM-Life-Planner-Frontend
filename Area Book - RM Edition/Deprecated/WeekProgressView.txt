@@ -1,0 +1,78 @@
+//
+//  WeekProgressView.swift
+//  Area Book - RM Edition
+//
+//  Created by spencer chavez on 10/19/23.
+//
+
+import SwiftUI
+import Foundation
+
+struct WeekProgressView: View {
+    @EnvironmentObject var appManager: RMLifePlannerManager
+    @State var report: GoalAchievingReport?
+    @State var rows: Int?
+    let startDate: Date
+    let endDate: Date
+    let emptyReportListener: EmptyReportListener
+
+    init(_ startDate: Date, emptyReportListener: EmptyReportListener) {
+        self.startDate = startDate
+        self.emptyReportListener = emptyReportListener
+        if let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate) {
+            self.endDate = endDate
+        } else {
+            ErrorManager.reportError(throwingFunction: "WeekProgressView.init()", loggingMessage: "Could not init endDate from startDate \(startDate.description)", messageToUser: "Error Encountered!")
+            self.endDate = Date.now
+        }
+    }
+    
+    var body: some View {
+        Section(header: Text(self.startDate.formatted(date: .complete, time: .omitted))) {
+            if let report = report {
+                if let rows = rows {
+                    Grid {
+                        ForEach(0..<rows, id: \.self) { row in
+                            GridRow {
+                                let desire1 = report.desires[0 + 2 * row]
+                                DesireAndGoalsProgressView(
+                                    desire: desire1,
+                                    goals: report.goalsByDesireId[desire1.desireId] ?? [])
+                                if report.desires.count > 1 + 2 * row {
+                                    let desire2 = report.desires[1 + 2 * row]
+                                    DesireAndGoalsProgressView(
+                                        desire: desire2,
+                                        goals: report.goalsByDesireId[desire2.desireId] ?? [])
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .onAppear(perform: {
+                        Task {
+                            let reportsManager = ReportsManager()
+                            let report = await reportsManager.getWeekReport(startDate: startDate)
+                            var rows = report.desires.count / 2
+                            if report.desires.count % 2 != 0 {
+                                rows += 1
+                            }
+                            if rows == 0 {
+                                self.emptyReportListener.gotEmptyReport(startDate: startDate)
+                            }
+                            self.report = report
+                            self.rows = rows
+                        }
+                    })
+                
+            }
+        }
+    }
+    
+}
+
+protocol EmptyReportListener {
+    func gotEmptyReport(startDate: Date) -> ()
+}
