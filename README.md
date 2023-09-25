@@ -6,7 +6,9 @@ This app is designed to combine the helpful features of a personal goal-tracking
 I think its full-functionality is best explained with an example, and pictures!
 
 ![Calendar Screenshot](IMG_1484.PNG)
-------------------------------------------------------------
+___________________________________________________________
+___________________________________________________________
+
 ![Editing Event Screenshot](IMG_1485.PNG)
 
   To begin, create an account:
