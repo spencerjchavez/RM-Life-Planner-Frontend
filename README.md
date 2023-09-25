@@ -5,8 +5,8 @@ Welcome to the RM Life Planner Frontend application - developed for IOS by Spenc
 This app is designed to combine the helpful features of a personal goal-tracking app with the full functionality of a cloud-based calendar.
 I think its full-functionality is best explained with an example, and pictures!
 
-![Calendar Screenshot](IMG_1484.png)
-![Editing Event Screenshot](IMG_1485.png)
+![Calendar Screenshot](IMG_1484.PNG)
+![Editing Event Screenshot](IMG_1485.PNG)
 
   To begin, create an account:
 
