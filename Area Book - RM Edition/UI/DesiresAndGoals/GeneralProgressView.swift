@@ -12,7 +12,6 @@ struct GeneralProgressView: View{
     
     @EnvironmentObject var appManager: RMLifePlannerManager
     @State var navigationPath = NavigationPath()
-    @State var promptCreateNew: Bool = false
     let report: GoalAchievingReport
     
     init() {
@@ -41,7 +40,6 @@ struct GeneralProgressView: View{
                     WeekProgressView(self.report)
                     VStack {
                         Spacer()
-                        if promptCreateNew {
                             HStack {
                                 Spacer()
                                 VStack (alignment: .trailing) {
@@ -54,19 +52,6 @@ struct GeneralProgressView: View{
                                             .foregroundColor(Colors.backgroundWhite)
                                             .padding()
                                             .background(RoundedRectangle(cornerRadius: 20).fill(Colors.accentColorLight))
-                                    }
-                                    if !report.desires.isEmpty {
-                                        Button {
-                                            //new goal button
-                                            navigationPath.append(NavTypes.goal)
-                                        } label: {
-                                            Text("Add or Edit Short-Term Goals")
-                                                .fontWeight(.semibold)
-                                                .foregroundColor(Colors.backgroundWhite)
-                                                .padding()
-                                                .background(RoundedRectangle(cornerRadius: 20).fill(Colors.accentColorLight))
-                                        }
-                                    }
                                 }.padding(.trailing)
                             }
                         }
