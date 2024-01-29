@@ -10,114 +10,152 @@ import SwiftUI
 struct WeekProgressView: View {
     
     @EnvironmentObject var appManager: RMLifePlannerManager
+    @State var editMode: Bool = false
+    
     let reportsManager = ReportsManager()
     var report: GoalAchievingReport
+    
+    @State var newDesireText: String = ""
+    @State var newDesireId: Int?
+    @FocusState var editingNewDesireName: Bool
+    
+    @State var updatedDesires: [Int: DesireLM] = [:]
+    @State var updatedGoals: [Int: GoalLM] = [:]
+    
+    @State var test: Bool = false
     
     init(_ report: GoalAchievingReport) {
         self.report = report
     }
     
     var body: some View {
-        ScrollView {
-            ScrollViewReader { reader in
-                VStack (spacing: 0) {
-                    // display holistic progress
-                    Text("This Week - \(Int((report.totalProgress*100).rounded()))% Completed")
-                        .font(.title)
-                        .fontWeight(.medium)
-                        .frame(maxWidth: .infinity)
-                        .background(Colors.backgroundOffWhite)
-                        .foregroundColor(Colors.textBody)
-                        .padding(.bottom)
-                    
-                    // display individual desires + goals
-                    ForEach(report.desires, id: \.self) { desire in
-                        Text(desire.name.capitalized)
-                            .fontWeight(.semibold)
-                            .font(.title2)
-                            .foregroundColor(Colors.textSubtitle)
+        VStack {
+            HStack {
+                Spacer()
+                Button{
+                    // open up prompt to create new priority or goal
+                    self.editMode.toggle()
+                } label: {
+                    Text(editMode ? "Save Changes" : "Edit Mode")
+                        .font(.title3)
+                }
+                .padding(.trailing)
+            }
+            ScrollView {
+                ScrollViewReader { reader in
+                    VStack (spacing: 0) {
+                        // display holistic progress
+                        Text("This Week - \(Int((report.totalProgress*100).rounded()))% Completed")
+                            .font(.title)
+                            .fontWeight(.medium)
                             .frame(maxWidth: .infinity)
-                        VStack (spacing: 0) {
-                            ForEach(report.goalsByDesireId[desire.desireId] ?? [], id: \.self) { goal in
-                                let amountAccomplished = report.goalsHowMuchAccomplished[goal.goalId] ?? 0.0
-                                let amountPlanned = report.goalsHowMuchPlanned[goal.goalId] ?? 0.0
-                                let color = GlobalVars.userPreferences.getColorOfPriority(goal.priorityLevel)
-                                HStack {
-                                    CircularProgressView(amountAccomplished: amountAccomplished,
-                                                         amountPlanned: amountPlanned,
-                                                         accentColor: color,
-                                                         backgroundColor: Colors.backgroundWhite)
-                                    .padding()
-                                    // display percentage completed
-                                    Text("\(Int((100 * amountAccomplished / amountPlanned).rounded()))%")
-                                        .fontWeight(.bold)
-                                        .font(.body)
-                                    //display goal text
-                                    Spacer(minLength: 0)
-                                    Text(goal.name.lowercased().replacingOccurrences(of: "i ", with: "I "))
-                                        .font(.body)
-                                        .padding(3)
-                                    Spacer(minLength: 0)
-                                    Divider()
-                                    VStack {
-                                        Text("Deadline:")
-                                        DeadlineText(goal.deadlineDate)
-                                    }
-                                    .padding(.trailing)
+                            .background(Colors.backgroundOffWhite)
+                            .foregroundColor(Colors.textBody)
+                            .padding(.bottom)
+                            .onTapGesture {
+                                self.editingNewDesireName = false
+                            }
+                        
+                        VStack{
+                            // display individual desires + goals
+                            ForEach(report.desires, id: \.self) { desire in
+                                @State var desireName: String = desire.name
+                                @FocusState var isFocused: Bool
+                                if editMode {
+                                    TextField("Enter a Long-Term Goal", text: $desireName)
+                                        .multilineTextAlignment(.center)
+                                        .fontWeight(.semibold)
+                                        .font(.title2)
+                                        .frame(maxWidth: .infinity)
+                                        .focused($isFocused)
+                                        .onChange(of: isFocused) { isFocused in
+                                            if !isFocused {
+                                                print("desire name unfocused")
+                                                if desireName.isEmpty {
+                                                    // revert to old name
+                                                    desireName = desire.name
+                                                } else {
+                                                    // update new name
+                                                    var desire = desire
+                                                    desire.name = desireName
+                                                    updatedDesires[desire.desireId] = desire
+                                                }
+                                            }
+                                        }
+                                } else {
+                                    Text(desire.name.capitalized)
+                                        .fontWeight(.semibold)
+                                        .font(.title2)
+                                        .foregroundColor(Colors.textSubtitle)
+                                        .frame(maxWidth: .infinity)
+                                        .onTapGesture {
+                                            self.editingNewDesireName = false
+                                        }
                                 }
-                                .frame(maxWidth: .infinity)
-                                .aspectRatio(5, contentMode: .fit)
-                                .background(Capsule().fill(color.opacity(0.2)))
-                                .padding(.bottom)
+                                VStack (spacing: 0) {
+                                    ForEach(report.goalsByDesireId[desire.desireId] ?? [], id: \.self) { goal in
+                                        let amountAccomplished = report.goalsHowMuchAccomplished[goal.goalId] ?? 0.0
+                                        let amountPlanned = report.goalsHowMuchPlanned[goal.goalId] ?? 0.0
+                                        let color = GlobalVars.userPreferences.getColorOfPriority(goal.priorityLevel)
+                                        if editMode {
+                                            EditGoalView(desireId: desire.desireId, goal: goal)
+                                                .padding()
+                                                .background {
+                                                    RoundedRectangle(cornerRadius: 20)
+                                                        .fill(color).opacity(0.5)
+                                                }
+                                                .padding(.bottom)
+                                                .onTapGesture {
+                                                    editingNewDesireName = false
+                                                }
+                                        } else {
+                                            GoalProgressView(
+                                                goalName: goal.name,
+                                                amountAccomplished: amountAccomplished,
+                                                amountPlanned: amountPlanned,
+                                                deadlineDate: goal.deadlineDate,
+                                                accentColor: color,
+                                                backgroundColor: Colors.backgroundWhite)
+                                            .background(Capsule().fill(color.opacity(0.5)))
+                                            .padding(.bottom)
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                .background(Colors.backgroundWhite)
-                .onAppear {
-                    Task {
-                        //report = await reportsManager.getWeekReport(startDate: Date.now)
+                        .onTapGesture {
+                            self.editingNewDesireName = false
+                        }
+                        // add prompt to create a new desire here
+                        if editMode {
+                            VStack {
+                                TextField("Enter A New Long-Term Goal", text: $newDesireText)
+                                    .fontWeight(.semibold)
+                                    .font(.title2)
+                                    .foregroundColor(Colors.textSubtitle)
+                                    .frame(maxWidth: .infinity)
+                                    .multilineTextAlignment(.center)
+                                    .focused($editingNewDesireName)
+                                    .onChange(of: editingNewDesireName) { name in
+                                        if !editingNewDesireName && !newDesireText.isEmpty {
+                                            // save the new desire
+                                            let desire = DesireLM(name: newDesireText, userId: GlobalVars.authentication!.user_id)
+                                            newDesireId = appManager.desiresManager.createDesire(desire: desire)
+                                        }
+                                    }
+                                if let desireId = newDesireId {
+                                    let accentColor = GlobalVars.userPreferences.getColorOfPriority(3)
+                                    EditGoalView(desireId: desireId)
+                                        .background(Capsule().fill(accentColor.opacity(0.2)))
+                                        .padding(.bottom)
+                                }
+                            }
+                        }
+                        
                     }
                 }
             }
         }
-    }
-    struct DeadlineText: View {
-        let date: Date?
-        let text: String
-        
-        init(_ date: Date?) {
-            self.date = date
-            if var date = date {
-                date = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date) ?? date
-                let formatter = DateFormatter()
-                let today = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date.now) ?? Date.now
-                let aWeekFromNow = Calendar.current.date(byAdding: DateComponents(day: 7), to: today) ?? Date.distantPast
-                if date < today {
-                    // deadline already passed
-                    // put date in numeric format
-                    formatter.dateFormat = "M/d"
-                } else if self.date == today {
-                    self.text = "today"
-                    return
-                } else if date < aWeekFromNow {
-                    // date is within a week, so just use day of week
-                    formatter.dateFormat = "E"
-                } else {
-                    // date is farther than a week out, so use full date
-                    formatter.dateFormat = "dddd"
-                }
-                self.text = formatter.string(from: date)
-            } else {
-                self.text = "never"
-                return
-            }
-        }
-        
-        var body: some View {
-            Text("\(text)")
-        }
-
     }
 }
 

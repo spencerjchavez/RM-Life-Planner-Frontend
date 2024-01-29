@@ -55,6 +55,7 @@ class GoalsManager : ObservableObject {
     }
     
     func getLocalGoalsInRange(_ startDate: Date, _ endDate: Date) -> [GoalLM] {
+        // TODO: make this crap more efficient. Should not need to split a date range up into every individual date
         let FUNC_NAME = "GoalsManager.getLocalGoalsInRange(startDate, endDate)"
         do {
             let dates = try DateHelper.getDatesInRange(startDate: startDate, endDate: endDate)

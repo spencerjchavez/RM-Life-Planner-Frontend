@@ -13,7 +13,7 @@ struct GlobalVars {
         return [URLQueryItem(name: "auth_user", value: String(GlobalVars.authentication!.user_id)),
                 URLQueryItem(name: "api_key", value: GlobalVars.authentication!.api_key)]
     }()
-    static var userPreferences: UserPreferencesLM = UserPreferencesLM(highestPriorityColor: Colors.priority1, veryHighPriorityColor: Colors.priority2, highPriorityColor: Colors.priority3, mediumPriorityColor: Colors.priority4, lowPriorityColor: Colors.priority5)
+    static var userPreferences: UserPreferencesLM = UserPreferencesLM(veryHighPriorityColor: Colors.priority1, highPriorityColor: Colors.priority2, mediumPriorityColor: Colors.priority3, lowPriorityColor: Colors.priority4)
     
     static let BASE_URL = URL(string: "http://191.101.1.153/api")!
     static let USERS_URL = BASE_URL.appending(path: "/users")

@@ -44,6 +44,11 @@ class DesiresManager : ObservableObject {
         }
         return nil
     }
+    
+    func getLocalDesiresOfUser() -> [DesireLM] {
+        return Array(desiresById.values)
+    }
+    
     func getDesiresOfUser() async -> [DesireLM] {
         let FUNC_NAME = "DesiresManager.getDesiresOfUser()"
         let idsToAwait = DesiresManager.activeTasksByDesireId.keys

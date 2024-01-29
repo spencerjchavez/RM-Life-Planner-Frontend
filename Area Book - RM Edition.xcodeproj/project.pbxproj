@@ -12,8 +12,8 @@
 		D94BD8172A7AB05E006D9F52 /* RRuleComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94BD8162A7AB05E006D9F52 /* RRuleComponents.swift */; };
 		D960C99D2A49F276006ACE4E /* CalendarEventModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960C99C2A49F276006ACE4E /* CalendarEventModificationView.swift */; };
 		D960C9A82A511668006ACE4E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960C9A72A511668006ACE4E /* SettingsView.swift */; };
-		D96C933B2AE9EA4200DFF270 /* EditDesiresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96C933A2AE9EA4200DFF270 /* EditDesiresView.swift */; };
-		D96C933D2AE9FA9700DFF270 /* CreateGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96C933C2AE9FA9700DFF270 /* CreateGoalView.swift */; };
+		D96C933B2AE9EA4200DFF270 /* EditDesiresView.txt in Sources */ = {isa = PBXBuildFile; fileRef = D96C933A2AE9EA4200DFF270 /* EditDesiresView.txt */; };
+		D96C933D2AE9FA9700DFF270 /* EditGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96C933C2AE9FA9700DFF270 /* EditGoalView.swift */; };
 		D974D7DB2A270F7900B25CB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974D7DA2A270F7900B25CB0 /* ContentView.swift */; };
 		D974D7DD2A270F7A00B25CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D974D7DC2A270F7A00B25CB0 /* Assets.xcassets */; };
 		D974D7E02A270F7A00B25CB0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D974D7DF2A270F7A00B25CB0 /* Preview Assets.xcassets */; };
@@ -96,8 +96,8 @@
 		D94BD8162A7AB05E006D9F52 /* RRuleComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRuleComponents.swift; sourceTree = "<group>"; };
 		D960C99C2A49F276006ACE4E /* CalendarEventModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventModificationView.swift; sourceTree = "<group>"; };
 		D960C9A72A511668006ACE4E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		D96C933A2AE9EA4200DFF270 /* EditDesiresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDesiresView.swift; sourceTree = "<group>"; };
-		D96C933C2AE9FA9700DFF270 /* CreateGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalView.swift; sourceTree = "<group>"; };
+		D96C933A2AE9EA4200DFF270 /* EditDesiresView.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditDesiresView.txt; sourceTree = "<group>"; };
+		D96C933C2AE9FA9700DFF270 /* EditGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalView.swift; sourceTree = "<group>"; };
 		D974D7D52A270F7900B25CB0 /* Area Book - RM Edition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Area Book - RM Edition.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D974D7DA2A270F7900B25CB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D974D7DC2A270F7A00B25CB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -451,8 +451,7 @@
 			children = (
 				D9E99A8D2ABC24B600FBB666 /* GeneralProgressView.swift */,
 				D9E99A922ABC28F300FBB666 /* GoalProgressView.swift */,
-				D96C933A2AE9EA4200DFF270 /* EditDesiresView.swift */,
-				D96C933C2AE9FA9700DFF270 /* CreateGoalView.swift */,
+				D96C933C2AE9FA9700DFF270 /* EditGoalView.swift */,
 				D9E1A0D22B505992005FF71B /* WeekProgressView.swift */,
 				D9E1A0DB2B50619A005FF71B /* CircularProgressView.swift */,
 			);
@@ -487,6 +486,7 @@
 		D9E1A0D62B50610A005FF71B /* Deprecated */ = {
 			isa = PBXGroup;
 			children = (
+				D96C933A2AE9EA4200DFF270 /* EditDesiresView.txt */,
 				D9E1A0D92B506173005FF71B /* WeekProgressView.txt */,
 				D9E1A0D72B506163005FF71B /* GoalAchievingReportWeekView.txt */,
 				D9E1A0D42B5060FE005FF71B /* DesirePieChart.txt */,
@@ -639,7 +639,7 @@
 				D981B3E42AA51129008D4535 /* SQLDateFormatter.swift in Sources */,
 				D981B3EC2AA55C68008D4535 /* RecurrenceSM.swift in Sources */,
 				D981B3F82AA676F4008D4535 /* CalendarEventsManager.swift in Sources */,
-				D96C933D2AE9FA9700DFF270 /* CreateGoalView.swift in Sources */,
+				D96C933D2AE9FA9700DFF270 /* EditGoalView.swift in Sources */,
 				D99974D82A804F0F00176CE4 /* ReportsManager.swift in Sources */,
 				D99974E02A82A44900176CE4 /* DesiresManager.swift in Sources */,
 				D9A2F9842A703AD70044EC51 /* Authentication.swift in Sources */,
@@ -671,7 +671,7 @@
 				D9E99A932ABC28F400FBB666 /* GoalProgressView.swift in Sources */,
 				D9E1A0D32B505992005FF71B /* WeekProgressView.swift in Sources */,
 				D9A2F98B2A783A540044EC51 /* ErrorManager.swift in Sources */,
-				D96C933B2AE9EA4200DFF270 /* EditDesiresView.swift in Sources */,
+				D96C933B2AE9EA4200DFF270 /* EditDesiresView.txt in Sources */,
 				D995760B2A34E4080070188B /* CalendarMonthView.swift in Sources */,
 				D99974D62A7DA9E100176CE4 /* CalendarEventDropDelegate.swift in Sources */,
 				D99974DA2A8051B300176CE4 /* GoalAchievingReport.swift in Sources */,
