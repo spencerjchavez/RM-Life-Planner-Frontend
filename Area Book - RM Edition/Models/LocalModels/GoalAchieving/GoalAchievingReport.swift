@@ -7,13 +7,20 @@
 
 import Foundation
 
-struct GoalAchievingReport : Hashable {
-    let startDate: Date
-    let endDate: Date
-    let desires: [DesireLM]
-    let goals: [GoalLM]
-    let todosByGoalId: [Int: [TodoLM]]
-    let eventsByGoalId: [Int: [CalendarEventLM]]
+/*
+ GoalAchievingReport is a structure to organize a user's desires, goals, todos, and events within a specified timeframe
+ and give useful statistics on overall completion rates etc.
+ Any goals that have a deadline date greater than the endDate of the report will be marked as
+ future goals and will only be included in the futureGoals and related variables.
+ */
+struct GoalAchievingReport : RMLifePlannerLocalModel {
+    var id: Int
+    var startDate: Date
+    var endDate: Date
+    var desires: [DesireLM]
+    var goals: [GoalLM]
+    var todosByGoalId: [Int: [TodoLM]]
+    var eventsByGoalId: [Int: [CalendarEventLM]]
     
     var totalProgress: Double
     var desiresProgress: [Int: Double] // [desireid: amount completed in decimal [0-1]]
@@ -31,8 +38,9 @@ struct GoalAchievingReport : Hashable {
     var futureGoals: [GoalLM]
     var futureGoalshowMuchPlanned: [Int: Double]
     var futureGoalsHowMuchAccomplished: [Int: Double]
-
+    
     init(startDate: Date, endDate: Date, desires: [DesireLM], goals: [GoalLM], todosByGoalId: [Int: [TodoLM]], eventsByGoalId: [Int: [CalendarEventLM]]) {
+        self.id = try! IdsManager.generateId()
         self.startDate = startDate
         self.endDate = endDate
         self.desires = desires.sorted(by: { d1, d2 in
@@ -62,7 +70,7 @@ struct GoalAchievingReport : Hashable {
         // init goalsByDesireId
         self.goalsByDesireId = [:]
         for goal in goals {
-            if goal.deadlineDate ?? Date.distantFuture > endDate {
+            if goal.deadlineDate ?? endDate > endDate {
                 // if goals deadline hasn't passed, put it in future goals report instead
                 futureGoals.append(goal)
                 continue
@@ -132,5 +140,8 @@ struct GoalAchievingReport : Hashable {
                 futureGoalsHowMuchAccomplished[futureGoal.goalId] = howMuchAccomplished
             }
         }
+    }
+    static func getModelName() -> String {
+        return "report"
     }
 }

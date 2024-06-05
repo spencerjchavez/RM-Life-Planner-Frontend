@@ -12,17 +12,19 @@ struct GeneralProgressView: View{
     
     @EnvironmentObject var appManager: RMLifePlannerManager
     @State var report: GoalAchievingReport?
+    @State private var reportsSubscriber: Any? = nil
+
     init(_ report: GoalAchievingReport? = nil) {
         self._report = State(initialValue: report)
     }
     
     var body: some View {
         VStack {
-            if let report = self.report {
+            if let report = report {
                 WeekProgressView(report)
             }
             Spacer()
-            Text("Your Priorities")
+            Text("Your Goals")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(Colors.textSubtitle)
@@ -31,21 +33,25 @@ struct GeneralProgressView: View{
                 .background(
                     Rectangle().fill(Colors.backgroundOffWhite))
             
-        }
-        .onAppear {
-            if self.report == nil {
-                // TODO: load report
-                
-                return
+        }.onAppear {
+            if let weekend = Calendar.current.nextWeekend(startingAfter: Date.now, direction: .backward) {
+                let startDate = Calendar.current.startOfDay(for: weekend.end)
+                if let reportId = appManager.reportsManager.createWeekReport(startDate: startDate) {
+                    report = appManager.reportsManager.getReport(id: reportId)
+                }
             }
+            reportsSubscriber = appManager.reportsManager.$reportsById.sink(receiveValue: { reportsById in
+                if let report = self.report {
+                    self.report = reportsById[report.id]
+                }
+            })
         }
-        
     }
 }
 struct GeneralProgressViewPreview: PreviewProvider {
     static var previews: some View {
         @StateObject var appManager: RMLifePlannerManager = RMLifePlannerManager()
-        let userId = GlobalVars.authentication!.user_id
+        let userId = 1
         
         let report = GoalAchievingReport(
             startDate: Calendar.current.date(byAdding: DateComponents.init(day:-3), to: Date.now)!,

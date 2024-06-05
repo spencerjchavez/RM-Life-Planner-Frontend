@@ -20,7 +20,6 @@ struct GoalLM : RMLifePlannerLocalModel {
     var priorityLevel: Int
     var recurrenceId: Int?
     var recurrenceDate: Date?
-
     
     init(goalId: Int? = nil, desireId: Int, userId: Int, name: String, howMuch: Double, measuringUnits: String? = nil, startDate: Date, deadlineDate: Date? = nil, priorityLevel: Int) {
         if let goalId = goalId {

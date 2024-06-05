@@ -2,7 +2,8 @@ import SwiftUI
 
 struct CalendarDayView: View {
     @EnvironmentObject var appManager: RMLifePlannerManager
-    
+    private let date: Date
+    @Binding private var navigationPath: NavigationPath
     let eventsXOffset = 50.0
     @State private var eventsYOffset = 0.0
     @State private var eventsRenderWidth = 0.0
@@ -11,12 +12,16 @@ struct CalendarDayView: View {
     
     @State private var eventsById: [Int: CalendarEventLM] = [:]
     @State private var eventBounds: [Int: CGRect] = [:] // by eventId
-    @State private var isProposingDrop: Bool = false
-    @State private var proposedNewStartInstant: Date? = nil
-    @Binding private var navigationPath: NavigationPath
     @State private var eventIdsByDaySubscriber: Any? = nil
     @State private var eventsByIdSubscriber: Any? = nil
-    private let date: Date
+    @State private var isProposingDrop: Bool = false
+    @State private var proposedNewStartInstant: Date? = nil
+    
+    @State private var goals: [GoalLM] = []
+    @State private var goalIdsByDaySubscriber: Any? = nil
+    @State private var todos: [TodoLM] = []
+    @State private var TodoIdsByDaySubscriber: Any? = nil
+    @State private var eventsByTodoId: [Int: CalendarEventLM] = [:]
     
     var previewEventDropYValue : Double? {
         if let proposedNewStartInstant = proposedNewStartInstant {
@@ -50,97 +55,119 @@ struct CalendarDayView: View {
         
     }
     var body: some View {
-        GeometryReader { globalGeometry in
-            ScrollView{
-                ScrollViewReader{ reader in
-                    ZStack() {
-                        Color.clear
-                        Rectangle() //used to capture drop events and register create event taps
-                            .fill(.white)
-                            .frame(width: globalGeometry.size.width, height: eventsRenderHeight)
-                            .onDrop(of: [.url], delegate: CalendarEventDropDelegate(appManager: appManager, isProposingDrop: $isProposingDrop, proposedNewStartInstant: $proposedNewStartInstant, date: date, yOffSet: eventsYOffset, maxY: eventsRenderHeight))
-                            .onTapGesture (coordinateSpace: CoordinateSpace.local) { location in
-                                navigationPath.append(CalendarEventModificationView(startInstant: instantFromYCoordinate(location.y), navigationPath: $navigationPath))
+        VStack {
+            GeometryReader { globalGeometry in
+                ScrollView{
+                    ScrollViewReader { reader in
+                        ZStack() {
+                            Color.clear
+                            Rectangle() //used to capture drop events and register create event taps
+                                .fill(.white)
+                                .frame(width: globalGeometry.size.width, height: eventsRenderHeight)
+                                .onDrop(of: [.url], delegate: CalendarEventDropDelegate(appManager: appManager, isProposingDrop: $isProposingDrop, proposedNewStartInstant: $proposedNewStartInstant, date: date, yOffSet: eventsYOffset, maxY: eventsRenderHeight))
+                                .onTapGesture (coordinateSpace: CoordinateSpace.local) { location in
+                                    navigationPath.append(CalendarEventModificationView(startInstant: instantFromYCoordinate(location.y), navigationPath: $navigationPath))
+                                }
+                            ForEach(0..<24, id: \.self) { hour in
+                                ZStack {
+                                    HStack{
+                                        Text(hour == 0 ? "12 am" : (hour < 12 ? hour.description + " am" : (hour == 12 ? "12 pm" : (hour - 12).description + " pm")))
+                                        Rectangle()
+                                            .fill(.gray)
+                                            .frame(height: 2.0)
+                                            .id("hour" + String(hour))
+                                    }
+                                }
+                                .position(x: globalGeometry.size.width / 2.0, y: yCoordinateByHour(Double(hour)))
+                                .allowsHitTesting(false)
                             }
-                        ForEach(0..<24, id: \.self) { hour in
-                            ZStack {
+                            
+                            ForEach(Array(eventsById.values), id: \.eventId) { event in
+                                let bounds = eventBounds[event.eventId] ?? .zero
+                                CalendarEventView(event: event)
+                                    .frame(width: bounds.width,
+                                           height: bounds.height,
+                                           alignment: .center)
+                                    .position(x: bounds.midX,
+                                              y: bounds.midY)
+                                    .onTapGesture {
+                                        navigationPath.append(CalendarEventModificationView(event: event, navigationPath: $navigationPath))
+                                    }
+                                    .onDrag {
+                                        CalendarEventDropDelegate.eventIdToDrop = event.eventId
+                                        return NSItemProvider()
+                                    } preview: {
+                                        CalendarEventView(event: event)
+                                            .frame(width: bounds.width, height: bounds.height, alignment: .center)
+                                    }
+                                    .allowsHitTesting(!isProposingDrop)
+                            }
+                            //drop preview time view
+                            if isProposingDrop {
                                 HStack{
-                                    Text(hour == 0 ? "12 am" : (hour < 12 ? hour.description + " am" : (hour == 12 ? "12 pm" : (hour - 12).description + " pm")))
+                                    Text(proposedNewStartTimeString ?? "nil")
+                                        .foregroundColor(.green)
                                     Rectangle()
-                                        .fill(.gray)
+                                        .fill(.black)
                                         .frame(height: 2.0)
                                 }
-                            }
-                            .position(x: globalGeometry.size.width / 2.0, y: yCoordinateByHour(Double(hour)))
-                            .allowsHitTesting(false)
-                        }
-                        ForEach(Array(eventsById.values), id: \.eventId) { event in
-                            let bounds = eventBounds[event.eventId] ?? .zero
-                            CalendarEventView(event: event)
-                                .frame(width: bounds.width,
-                                       height: bounds.height,
-                                       alignment: .center)
-                                .position(x: bounds.midX,
-                                          y: bounds.midY)
-                                .onTapGesture {
-                                    navigationPath.append(CalendarEventModificationView(event: event, navigationPath: $navigationPath))
-                                }
-                                .onDrag {
-                                    CalendarEventDropDelegate.eventIdToDrop = event.eventId
-                                    return NSItemProvider()
-                                } preview: {
-                                    CalendarEventView(event: event)
-                                        .frame(width: bounds.width, height: bounds.height, alignment: .center)
-                                }
-                            .allowsHitTesting(!isProposingDrop)
-                        }
-                        //drop preview time view
-                        if isProposingDrop {
-                            HStack{
-                                Text(proposedNewStartTimeString ?? "nil")
-                                    .foregroundColor(.green)
-                                Rectangle()
-                                    .fill(.black)
-                                    .frame(height: 2.0)
-                            }
-                            .position(x: globalGeometry.size.width / 2, y: previewEventDropYValue ?? 0)
-                            .allowsHitTesting(false)
-                        }
-                    }
-                    .frame(height: eventsRenderHeight + eventsYOffset)
-                    .background(
-                        GeometryReader { geometry in
-                            Color.clear.onAppear {
-                                reader.scrollTo(0, anchor: .top)
-                                eventsRenderWidth = geometry.size.width - eventsXOffset
-                                eventHeightPerSecond = eventsRenderHeight / 25.0 / 60.0 / 60.0
-                                eventsYOffset = eventHeightPerSecond * 60 * 60 / 2.0
-                              
-                                self.eventsByIdSubscriber = appManager.eventsManager.$eventsById.sink(receiveValue: { eventsById in
-                                    // get events on day, and use captured eventsById to push updated event info to view
-                                    let eventsOnDay = appManager.eventsManager.getLocalCalendarEventsOnDate(date, userRequested: true)
-                                    var newEventsById: [Int: CalendarEventLM] = [:]
-                                    for event in eventsOnDay {
-                                        newEventsById[event.eventId] = eventsById[event.eventId]
-                                    }
-                                    calculateEventRects(newEventsById)
-                                    self.eventsById = newEventsById
-                                })
-                                let events = appManager.eventsManager.getLocalCalendarEventsOnDate(date, userRequested: true)
-                                if self.eventsById.count == 0 {
-                                    self.eventsById = [:]
-                                    for event in events {
-                                        self.eventsById[event.eventId] = event
-                                    }
-                                    calculateEventRects(self.eventsById)
-                                }
-                                reader.scrollTo(6, anchor: .top)
+                                .position(x: globalGeometry.size.width / 2, y: previewEventDropYValue ?? 0)
+                                .allowsHitTesting(false)
                             }
                         }
-                    )
-                } // scrollViewReader
-            }
-        } // globalGeometry
+                        .frame(height: eventsRenderHeight + eventsYOffset)
+                        .background(
+                            GeometryReader { geometry in
+                                Color.clear.onAppear {
+                                   // get events and calculate their bounds
+                                    eventsRenderWidth = geometry.size.width - eventsXOffset
+                                    eventHeightPerSecond = eventsRenderHeight / 25.0 / 60.0 / 60.0
+                                    eventsYOffset = eventHeightPerSecond * 60 * 60 / 2.0
+
+                                    _ = self.appManager.eventsManager.getLocalCalendarEventsOnDate(self.date)
+                                    _ = self.appManager.todosManager.getLocalTodosOnDate(self.date)
+                                    _ = self.appManager.goalsManager.getLocalGoalsOnDate(self.date)
+                                    self.eventIdsByDaySubscriber = appManager.eventsManager.$eventIdsByDate.sink(receiveValue: { eventIdsByDate in
+                                        self.eventsById = [:]
+                                        self.eventsByTodoId = [:]
+                                        for eventId in eventIdsByDate[self.date] ?? [] {
+                                            if let event = appManager.eventsManager.getCalendarEvent(eventId: eventId) {
+                                                self.eventsById[event.eventId] = event
+                                                if let linkedTodoId = event.linkedTodoId {
+                                                    self.eventsByTodoId[linkedTodoId] = event
+                                                }
+                                            }
+                                        }
+                                    })
+                                    self.eventsByIdSubscriber = appManager.eventsManager.$eventsById.sink(receiveValue: { eventsById in
+                                        // TODO: change this so we only calculate events on this date
+                                        calculateEventRects(eventsById)
+                                    })
+                                
+                                    // get todos and goals. perhaps move this logic somewhere else in the future
+                                    self.goalIdsByDaySubscriber = appManager.goalsManager.$goalIdsByDate.sink(receiveValue: { goalsIdsByDate in
+                                        let ids = goalsIdsByDate[self.date] ?? []
+                                        self.goals = ids.compactMap({ id in
+                                            self.appManager.goalsManager.getGoal(goalId: id)
+                                        })
+                                    })
+                                    self.TodoIdsByDaySubscriber = appManager.todosManager.$todoIdsByDate.sink(receiveValue: { todoIdsByDate in
+                                        let ids = todoIdsByDate[self.date] ?? []
+                                        self.todos = ids.compactMap({ id in
+                                            self.appManager.todosManager.getLocalTodo(todoId: id)
+                                        })
+                                    })
+                                    
+                                    reader.scrollTo("hour6", anchor: .top)
+                                }
+                            }
+                        )
+                    } // scrollViewReader
+                } // scrollView
+            } // globalGeometry
+            // display all current todos
+            TodosProgressView(todos: todos, eventsByTodoId: eventsByTodoId)
+        }
     }
     func calculateEventRects(_ eventsById: [Int: CalendarEventLM]) {
         // calculate rectangles

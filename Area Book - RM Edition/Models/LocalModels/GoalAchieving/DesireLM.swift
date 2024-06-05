@@ -63,9 +63,6 @@ struct DesireLM : RMLifePlannerLocalModel {
             }
         }
     }
-    static func == (lhs: DesireLM, rhs: DesireLM) -> Bool {
-        return lhs.desireId == rhs.desireId
-    }
     static func getModelName() -> String {
         return "Desire"
     }

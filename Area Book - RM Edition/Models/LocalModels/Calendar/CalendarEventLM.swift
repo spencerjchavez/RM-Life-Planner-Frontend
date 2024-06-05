@@ -47,10 +47,10 @@ struct CalendarEventLM : RMLifePlannerLocalModel{
             throw RMLifePlannerError.serverError("event model returned from server is missing an event id")
         }
         eventId = try IdsManager.getOrGenerateLocalId(from: smEventId, modelType: CalendarEventLM.getModelName())
-        if let todoId = linkedTodoId {
+        if let todoId = sm.linkedTodoId {
             self.linkedTodoId = try IdsManager.getOrGenerateLocalId(from: todoId, modelType: TodoLM.getModelName())
         }
-        if let goalId = linkedGoalId {
+        if let goalId = sm.linkedGoalId {
             self.linkedGoalId = try IdsManager.getOrGenerateLocalId(from: goalId, modelType: GoalLM.getModelName())
         }
         if let recurrenceId = recurrenceId {

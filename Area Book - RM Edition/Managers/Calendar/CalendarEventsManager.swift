@@ -11,11 +11,12 @@ class CalendarEventsManager : ObservableObject {
     /*
      All functions in this class must update eventIdsByDate BEFORE updating eventsById. Otherwise, publisher will not publish changes to eventIdsByDate properly.
      */
+    
     @Published var eventsById: [Int: CalendarEventLM] = [:]
     @Published var eventIdsByDate: [Date: [Int]] = [:]
-    static var activeTasksByCalendarEventId: [Int: Task<Void, Never>] = [:]
-    static var activeTasksByDate: [Date: Task<Void, Never>] = [:]
-
+    var eventIdsByGoalId: [Int: [Int]] = [:]
+    var managerTaskScheduler = ManagerTaskScheduler()
+    var authentication: Authentication? = nil
     
     func createCalendarEvent(event: CalendarEventLM) {
         let FUNC_NAME = "CalendarEventManager.createCalendarEvent(event)"
@@ -23,32 +24,34 @@ class CalendarEventsManager : ObservableObject {
             ErrorManager.reportError(throwingFunction:  FUNC_NAME, loggingMessage: "Invalid state! Attempted to create event with id \(event.eventId), but event of that id already exists", messageToUser: "Error encountered while adding event, please try again later.")
             return
         }
+        guard let authentication = authentication else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return
+        }
         eventsById[event.eventId] = event
         addToCalendarEventIdsByDate(event)
-        var toAwait: Task<Void, Never>? // must await creation of linked goal first
-        if let linkedGoalId = event.linkedGoalId {
-            toAwait = GoalsManager.activeTasksByGoalId[linkedGoalId]
-        }
-        let goalToAwait = toAwait
-        if let linkedTodoId = event.linkedTodoId {
-            toAwait = TodosManager.activeTasksByTodoId[linkedTodoId]
-        }
-        let todoToAwait = toAwait
-        CalendarEventsManager.activeTasksByCalendarEventId[event.eventId] = Task {
+        addToCalendarEventIdsByGoalId(event)
+        managerTaskScheduler.schedule(syncId: event.eventId) {
             do {
-                await goalToAwait?.value
-                await todoToAwait?.value
                 let eventSM = CalendarEventSM(from: event)
-                let serverSideId = try await CalendarEventServices.create(eventSM)
-                IdsManager.associateServerId(serverSideId: serverSideId, with: event.eventId, modelType: CalendarEventLM.getModelName())
+                let serverSideId = try await CalendarEventServices.create(eventSM, authentication: authentication)
+                DispatchSerialQueue.main.async {
+                    IdsManager.associateServerId(serverSideId: serverSideId, with: event.eventId, modelType: CalendarEventLM.getModelName())
+                }
             } catch RMLifePlannerError.serverError(let message){
-                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received error from server: \(message) while adding eventId \(event.eventId)", messageToUser: "Error encountered while adding event, please try again later.")
-                eventsById[event.eventId] = nil
-                removeFromCalendarEventIdsByDate(event)
+                DispatchSerialQueue.main.async {
+                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received error from server: \"\(message)\" while adding eventId \(event.eventId)", messageToUser: "Error encountered while adding event, please try again later.")
+                    self.eventsById[event.eventId] = nil
+                    self.removeFromCalendarEventIdsByDate(event)
+                    self.removeFromCalendarEventIdsByGoalId(event)
+                }
             } catch {
-                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received unknown error while creating event", messageToUser: "Error encountered while adding event, please try again later.")
-                eventsById[event.eventId] = nil
-                removeFromCalendarEventIdsByDate(event)
+                DispatchSerialQueue.main.async {
+                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received unknown error while creating event", messageToUser: "Error encountered while adding event, please try again later.")
+                    self.eventsById[event.eventId] = nil
+                    self.removeFromCalendarEventIdsByDate(event)
+                    self.removeFromCalendarEventIdsByGoalId(event)
+                }
             }
         }
     }
@@ -102,67 +105,93 @@ class CalendarEventsManager : ObservableObject {
             } else {
                 // add date to list to fetch from server async
                 datesToFetchFromServer.append(date)
+                self.eventIdsByDate[date] = []
             }
         }
         if datesToFetchFromServer.isEmpty {
             return toReturn
         }
-        var tasksToAwait: [Task <Void, Never>] = []
-        for date in datesToFetchFromServer {
-            if let task = CalendarEventsManager.activeTasksByDate[date] {
-                tasksToAwait.append(task)
-            }
-        }
-        let toAwait = tasksToAwait
         let datesToFetch = datesToFetchFromServer
-        let task = Task {
-            for task in toAwait {
-                await task.value
-            }
-            let events = await getCalendarEventsOnDates(datesToFetch)
-        }
-        for date in datesToFetch {
-            CalendarEventsManager.activeTasksByDate[date] = task
+        Task {
+            let _ = await getCalendarEventsOnDates(datesToFetch)
         }
         return toReturn
     }
     
     func getCalendarEventsInRange(_ startDate: Date, _ endDate: Date) async -> [CalendarEventLM] {
         let FUNC_NAME = "CalendarEventManager.getCalendarEventsInRange(startDate endDate)"
+        guard let authentication = authentication else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return []
+        }
         do{
-            let eventSMs = try await CalendarEventServices.getByDateRange(SQLDateFormatter.toSQLDateString(startDate), SQLDateFormatter.toSQLDateString(endDate))
+            let eventSMs = try await CalendarEventServices.getByDateRange(SQLDateFormatter.toSQLDateString(startDate), SQLDateFormatter.toSQLDateString(endDate), authentication: authentication)
             var toReturn: [CalendarEventLM] = []
             for eventSM in eventSMs {
                 let eventLM = try CalendarEventLM(from: eventSM)
-                eventsById[eventLM.eventId] = eventLM
-                addToCalendarEventIdsByDate(eventLM)
                 toReturn.append(eventLM)
             }
+            let events = toReturn
+            DispatchSerialQueue.main.async {
+                for eventLM in events {
+                    self.eventsById[eventLM.eventId] = eventLM
+                    self.addToCalendarEventIdsByDate(eventLM)
+                    self.addToCalendarEventIdsByGoalId(eventLM)
+                }
+            }
             return toReturn
+            
         } catch RMLifePlannerError.serverError(let message) {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Received server error: \(message)", messageToUser: "Error encountered. Please try again")
+            DispatchSerialQueue.main.async {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Received server error: \(message)", messageToUser: "Error encountered. Please try again")
+            }
         } catch let err {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
+            DispatchSerialQueue.main.async {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
+            }
         }
         return []
     }
     
     func getCalendarEventsOnDates(_ dates: [Date]) async -> [Date: [CalendarEventLM]] {
         let FUNC_NAME = "CalendarEventManager.getCalendarEventsOnDates(dates)"
+        guard let authentication = authentication else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return [:]
+        }
+        let dateStrings = dates.map({ date in
+            SQLDateFormatter.toSQLDateString(date)
+        })
+        var eventsSMByDate: [String: [CalendarEventSM]] = [:]
         do {
-            let dateStrings = dates.map({ date in
-                SQLDateFormatter.toSQLDateString(date)
-            })
-            let eventsSMByDate = try await CalendarEventServices.getByDates(dateStrings)
+            eventsSMByDate = try await CalendarEventServices.getByDates(dateStrings, authentication: authentication)
+        } catch RMLifePlannerError.serverError(let message) {
+            DispatchSerialQueue.main.async {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Received server error: \(message)", messageToUser: "Error encountered. Please try again")
+            }
+        } catch let err {
+            DispatchSerialQueue.main.async {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
+            }
+        }
+        let eventSMsByDate = eventsSMByDate
+        return DispatchQueue.main.sync {
             for dateString in dateStrings {
                 if let date = SQLDateFormatter.toDate(ymdDate: dateString) {
-                    eventIdsByDate[date] = []
-                    if let eventSms = eventsSMByDate[dateString] {
-                        for eventSm in eventSms {
-                            let eventLM = try CalendarEventLM(from: eventSm)
-                            eventsById[eventLM.eventId] = eventLM
-                            eventIdsByDate[date]?.append(eventLM.eventId)
+                    self.eventIdsByDate[date] = []
+                    do {
+                        if let eventSms = eventSMsByDate[dateString] {
+                            for eventSm in eventSms {
+                                let eventLM = try CalendarEventLM(from: eventSm)
+                                self.eventsById[eventLM.eventId] = eventLM
+                                self.eventIdsByDate[date]?.append(eventLM.eventId)
+                                self.addToCalendarEventIdsByGoalId(eventLM)
+                            }
+                        } else {
+                            throw RMLifePlannerError.serverError("couldn't parse string")
                         }
+                    } catch let err {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "could not parse date string from database: \(dateString)", messageToUser: "Error retrieving events, please try again later")
                     }
                 } else {
                     ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "could not parse date string from database: \(dateString)", messageToUser: "Error retrieving events, please try again later")
@@ -170,8 +199,8 @@ class CalendarEventsManager : ObservableObject {
             }
             var eventsByDate: [Date: [CalendarEventLM]] = [:]
             for date in dates {
-                eventsByDate[date] = eventIdsByDate[date]?.compactMap({ eventId in
-                    if let event = eventsById[eventId] {
+                eventsByDate[date] = self.eventIdsByDate[date]?.compactMap({ eventId in
+                    if let event = self.eventsById[eventId] {
                         return event
                     } else {
                         ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Invalid state, event id found in eventIdsByDate but does not exist in eventsById", messageToUser: "Error encountered, please restart or try again later")
@@ -180,128 +209,183 @@ class CalendarEventsManager : ObservableObject {
                 })
             }
             return eventsByDate
-        } catch RMLifePlannerError.serverError(let message) {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Received server error: \(message)", messageToUser: "Error encountered. Please try again")
-        } catch let err {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
         }
-        return [:]
     }
+
     
     func getCalendarEventsByGoalIds(_ goalIds: [Int]) async -> [Int: [CalendarEventLM]] {
         let FUNC_NAME = "CalendarEventManager.getCalendarEventsByGoalIds(goalIds)"
+        guard let authentication = authentication else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return [:]
+        }
+        let serverGoalIds = DispatchQueue.main.sync {
+            do {
+                let serverGoalIds = try goalIds.map({ goalId in
+                    guard let serverId = IdsManager.getServerId(from: goalId) else {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "goal of id: \(goalId) did not have an associated server goal id", messageToUser: "error retrieving events, please try again later")
+                        throw RMLifePlannerError.clientError
+                    }
+                    return serverId
+                })
+                return serverGoalIds
+            } catch RMLifePlannerError.serverError(let message) {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Received server error: \(message)", messageToUser: "Error encountered. Please try again")
+            } catch let err {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
+            }
+            return []
+        }
         do {
             var toReturn: [Int: [CalendarEventLM]] = [:]
-            let serverGoalIds = try goalIds.map({ goalId in
-                guard let serverId = IdsManager.getServerId(from: goalId) else {
-                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "goal of id: \(goalId) did not have an associated server goal id", messageToUser: "error retrieving events, please try again later")
-                    throw RMLifePlannerError.clientError
+            let eventSMsByGoal = try await CalendarEventServices.getByGoalIds(serverGoalIds, authentication: authentication)
+            try DispatchQueue.main.sync {
+                for goalId in eventSMsByGoal.keys {
+                    let localGoalId = try IdsManager.getOrGenerateLocalId(from: goalId, modelType: CalendarEventLM.getModelName())
+                    toReturn[localGoalId] = try eventSMsByGoal[goalId]?.map({ eventSm in
+                        return try CalendarEventLM(from: eventSm)
+                    })
                 }
-                return serverId
-            })
-            let eventSMsByGoal = try await CalendarEventServices.getByGoalIds(serverGoalIds)
-            for goalId in eventSMsByGoal.keys {
-                let localGoalId = try IdsManager.getOrGenerateLocalId(from: goalId, modelType: CalendarEventLM.getModelName())
-                toReturn[localGoalId] = try eventSMsByGoal[goalId]?.map({ eventSm in
-                    return try CalendarEventLM(from: eventSm)
-                })
             }
             return toReturn
-        } catch RMLifePlannerError.serverError(let message) {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Received server error: \(message)", messageToUser: "Error encountered. Please try again")
         } catch let err {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
+            DispatchQueue.main.async {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Error encountered: \(err)", messageToUser: "Error encountered. Please try again")
+            }
         }
         return [:]
+    }
+
+    func getLocalCalendarEventsByGoalIds(_ goalIds: [Int]) -> [Int: [CalendarEventLM]] {
+        var toReturn: [Int: [CalendarEventLM]] = [:]
+        var toFetch: [Int] = []
+        for goalId in goalIds {
+            if let eventIds = self.eventIdsByGoalId[goalId] {
+                let events = eventIds.compactMap({ eventId in
+                    return self.eventsById[eventId]
+                })
+                toReturn[goalId] = events
+            } else {
+                toFetch.append(goalId)
+                // this prevents fetching from server multiple times
+                self.eventIdsByGoalId[goalId] = []
+            }
+        }
+        let goalIdsToFetch = toFetch
+        Task {
+            let _ = await getCalendarEventsByGoalIds(goalIdsToFetch)
+        }
+        return toReturn
     }
     
     func updateCalendarEvent(eventId: Int, updatedCalendarEvent: CalendarEventLM) {
         let FUNC_NAME = "CalendarEventsManager.updateCalendarEvent(eventId, updatedCalendarEvent)"
-        let taskToAwait = CalendarEventsManager.activeTasksByCalendarEventId[eventId]
+        guard eventId == updatedCalendarEvent.eventId else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "Invalid state, updated event has different id than original event", messageToUser: "Error encountered. Please try again later.")
+            return
+        }
+        guard let authentication = authentication else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return
+        }
         if let oldCalendarEvent = eventsById[eventId] {
-            if oldCalendarEvent.startInstant != updatedCalendarEvent.startInstant || oldCalendarEvent.endInstant != updatedCalendarEvent.endInstant {
-                // need to change eventIDsByDate
-                removeFromCalendarEventIdsByDate(oldCalendarEvent)
-                addToCalendarEventIdsByDate(updatedCalendarEvent)
-            }
+            removeFromCalendarEventIdsByDate(oldCalendarEvent)
+            removeFromCalendarEventIdsByGoalId(oldCalendarEvent)
+            addToCalendarEventIdsByDate(updatedCalendarEvent)
+            addToCalendarEventIdsByGoalId(updatedCalendarEvent)
             eventsById[eventId] = updatedCalendarEvent
             // update eventsById last, so that changes to eventsByDay are captured
             // when dragging and dropping to a new day
 
-            var toAwait: Task<Void, Never>?
-            if let linkedGoalId = updatedCalendarEvent.linkedGoalId {
-                if oldCalendarEvent.linkedGoalId != linkedGoalId {
-                    toAwait = GoalsManager.activeTasksByGoalId[linkedGoalId]
-                }
-            }
-            let goalTaskToAwait = toAwait
-            if let linkedTodoId = updatedCalendarEvent.linkedTodoId {
-                if oldCalendarEvent.linkedTodoId != linkedTodoId {
-                    toAwait = TodosManager.activeTasksByTodoId[linkedTodoId]
-                }
-            }
-            let todoTaskToAwait = toAwait
-            CalendarEventsManager.activeTasksByCalendarEventId[eventId] = Task {
-                await taskToAwait?.value
-                await goalTaskToAwait?.value
-                await todoTaskToAwait?.value
-                var updatedCalendarEvent = updatedCalendarEvent
-                updatedCalendarEvent.eventId = eventId
+            managerTaskScheduler.schedule(syncId: eventId) {
+                var updatedCalendarEventVar = updatedCalendarEvent
+                updatedCalendarEventVar.eventId = eventId
+                let updatedCalendarEvent = updatedCalendarEventVar
                 do{
                     let updatedCalendarEventSM = CalendarEventSM(from: updatedCalendarEvent)
                     if let serverSideId = updatedCalendarEventSM.eventId {
-                        try await CalendarEventServices.update(serverSideId, updatedCalendarEventSM)
+                        try await CalendarEventServices.update(serverSideId, updatedCalendarEventSM, authentication: authentication)
                     } else {
-                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "failed to find a server id associated with client id: \(eventId)", messageToUser: "Error encountered while updating event, please try again later or restart the app.")
-                        eventsById[eventId] = nil
-                        removeFromCalendarEventIdsByDate(updatedCalendarEvent)
+                        DispatchQueue.main.async {
+                            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "failed to find a server id associated with client id: \(eventId)", messageToUser: "Error encountered while updating event, please try again later or restart the app.")
+                            self.eventsById[eventId] = nil
+                            self.removeFromCalendarEventIdsByDate(updatedCalendarEvent)
+                            self.removeFromCalendarEventIdsByGoalId(updatedCalendarEvent)
+                        }
                     }
                 } catch RMLifePlannerError.clientError {
-                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "could not create CalendarEventSM from CalendarEventLM of id \(updatedCalendarEvent.eventId)", messageToUser: "Error encountered while updating event, please try again later.")
-                    eventsById[eventId] = oldCalendarEvent
-                    removeFromCalendarEventIdsByDate(updatedCalendarEvent)
-                    addToCalendarEventIdsByDate(oldCalendarEvent)
+                    DispatchQueue.main.async {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "could not create CalendarEventSM from CalendarEventLM of id \(updatedCalendarEvent.eventId)", messageToUser: "Error encountered while updating event, please try again later.")
+                        self.eventsById[eventId] = oldCalendarEvent
+                        self.removeFromCalendarEventIdsByDate(updatedCalendarEvent)
+                        self.removeFromCalendarEventIdsByGoalId(updatedCalendarEvent)
+                        self.addToCalendarEventIdsByDate(oldCalendarEvent)
+                        self.addToCalendarEventIdsByGoalId(oldCalendarEvent)
+                    }
                 } catch RMLifePlannerError.serverError(let message){
-                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received error from server: \(message) while updating event of id \(eventId)", messageToUser: "Error encountered while updating event, please try again later.")
-                    eventsById[eventId] = oldCalendarEvent
-                    removeFromCalendarEventIdsByDate(updatedCalendarEvent)
-                    addToCalendarEventIdsByDate(oldCalendarEvent)
+                    DispatchQueue.main.async {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received error from server: \(message) while updating event of id \(eventId)", messageToUser: "Error encountered while updating event, please try again later.")
+                        self.eventsById[eventId] = oldCalendarEvent
+                        self.removeFromCalendarEventIdsByDate(updatedCalendarEvent)
+                        self.removeFromCalendarEventIdsByGoalId(updatedCalendarEvent)
+                        self.addToCalendarEventIdsByDate(oldCalendarEvent)
+                        self.addToCalendarEventIdsByGoalId(oldCalendarEvent)
+                    }
                 } catch {
-                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received unknown error while updating event", messageToUser: "Error encountered while updating event, please try again later.")
-                    eventsById[eventId] = oldCalendarEvent
-                    removeFromCalendarEventIdsByDate(updatedCalendarEvent)
-                    addToCalendarEventIdsByDate(oldCalendarEvent)
+                    DispatchQueue.main.async {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received unknown error while updating event", messageToUser: "Error encountered while updating event, please try again later.")
+                        self.eventsById[eventId] = oldCalendarEvent
+                        self.removeFromCalendarEventIdsByDate(updatedCalendarEvent)
+                        self.removeFromCalendarEventIdsByGoalId(updatedCalendarEvent)
+                        self.addToCalendarEventIdsByDate(oldCalendarEvent)
+                        self.addToCalendarEventIdsByGoalId(oldCalendarEvent)
+                    }
                 }
             }
         } else {
-            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "failed to find a event of id: \(eventId)", messageToUser: "Error encountered while updating event, please try again later or restart the app.")
+            DispatchQueue.main.async {
+                ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "failed to find a event of id: \(eventId)", messageToUser: "Error encountered while updating event, please try again later or restart the app.")
+            }
         }
     }
     
     func deleteCalendarEvent(eventId: Int) {
         let FUNC_NAME = "CalendarEventsManager.deleteCalendarEvent(eventId)"
+        guard let authentication = authentication else {
+            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return
+        }
         if let oldCalendarEvent = eventsById[eventId] {
             removeFromCalendarEventIdsByDate(oldCalendarEvent)
+            removeFromCalendarEventIdsByGoalId(oldCalendarEvent)
             eventsById[eventId] = nil
-            let taskToAwait = CalendarEventsManager.activeTasksByCalendarEventId[eventId]
-            Task {
-                await taskToAwait?.value
-                if let serverSideId = IdsManager.getServerId(from: eventId) {
-                    do {
-                        try await CalendarEventServices.delete(serverSideId)
-                    } catch RMLifePlannerError.serverError(let message){
-                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received error from server: \(message) while deleting event of id \(eventId)", messageToUser: "Error encountered while deleting event, please try again later.")
-                        //eventsById[eventId] = oldCalendarEvent
-                        //addToCalendarEventIdsByDate(oldCalendarEvent)
-                    } catch {
-                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received unknown error while deleting event", messageToUser: "Error encountered while deleting event, please try again later.")
-                       // eventsById[eventId] = oldCalendarEvent
-                        //addToCalendarEventIdsByDate(oldCalendarEvent)
+            managerTaskScheduler.schedule(syncId: eventId) {
+                do {
+                    let serverSideId = try DispatchQueue.main.sync {
+                        guard let serverSideId = IdsManager.getServerId(from: eventId) else {
+                            ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "invalid state! failed to find a server id associated with client id: \(eventId)", messageToUser: "Error encountered while deleting event, please try again later or restart the app.")
+                            self.eventsById[eventId] = oldCalendarEvent
+                            self.addToCalendarEventIdsByDate(oldCalendarEvent)
+                            self.addToCalendarEventIdsByGoalId(oldCalendarEvent)
+                            throw RMLifePlannerError.clientError
+                        }
+                        return serverSideId
                     }
-                } else {
-                    ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "invalid state! failed to find a server id associated with client id: \(eventId)", messageToUser: "Error encountered while deleting event, please try again later or restart the app.")
-                   // eventsById[eventId] = oldCalendarEvent
-                    //addToCalendarEventIdsByDate(oldCalendarEvent)
+                    try await CalendarEventServices.delete(serverSideId, authentication: authentication)
+                } catch RMLifePlannerError.serverError(let message){
+                    DispatchQueue.main.async {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received error from server: \(message) while deleting event of id \(eventId)", messageToUser: "Error encountered while deleting event, please try again later.")
+                        self.eventsById[eventId] = oldCalendarEvent
+                        self.addToCalendarEventIdsByDate(oldCalendarEvent)
+                        self.addToCalendarEventIdsByGoalId(oldCalendarEvent)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        ErrorManager.reportError(throwingFunction: FUNC_NAME, loggingMessage: "received unknown error while deleting event", messageToUser: "Error encountered while deleting event, please try again later.")
+                        self.eventsById[eventId] = oldCalendarEvent
+                        self.addToCalendarEventIdsByDate(oldCalendarEvent)
+                        self.addToCalendarEventIdsByGoalId(oldCalendarEvent)
+                    }
                 }
             }
         } else {
@@ -315,6 +399,7 @@ class CalendarEventsManager : ObservableObject {
         for event in eventsToDelete {
             eventsById.removeValue(forKey: event.eventId)
             removeFromCalendarEventIdsByDate(event)
+            removeFromCalendarEventIdsByGoalId(event)
         }
     }
     func invalidateEventsAfterDate(after: Date) {
@@ -333,6 +418,7 @@ class CalendarEventsManager : ObservableObject {
             for event in eventsToInvalidate {
                 eventsById[event.eventId] = nil
                 removeFromCalendarEventIdsByDate(event)
+                removeFromCalendarEventIdsByGoalId(event)
             }
             Task {
                 _ = await getCalendarEventsOnDates([after])
@@ -362,6 +448,23 @@ class CalendarEventsManager : ObservableObject {
                     })
                 }
             }
+        }
+    }
+    
+    private func addToCalendarEventIdsByGoalId(_ event: CalendarEventLM) {
+        if let linkedGoalId = event.linkedGoalId {
+            var eventIds = eventIdsByGoalId[linkedGoalId] ?? []
+            eventIds.append(event.eventId)
+            eventIdsByGoalId[linkedGoalId] = eventIds
+        }
+    }
+    private func removeFromCalendarEventIdsByGoalId(_ event: CalendarEventLM) {
+        if let linkedGoalId = event.linkedGoalId {
+            var eventIds = self.eventIdsByGoalId[linkedGoalId] ?? []
+            eventIds.removeAll(where: { eventId in
+                eventId == event.eventId
+            })
+            self.eventIdsByGoalId[linkedGoalId] = eventIds
         }
     }
 }

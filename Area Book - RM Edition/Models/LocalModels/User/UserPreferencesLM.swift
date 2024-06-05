@@ -10,11 +10,6 @@ import SwiftUI
 
 struct UserPreferencesLM {
     
-    var primaryColor: Color = .white
-    var secondaryColor: Color = .red
-    var accentColor: Color = .blue
-    var accentColor2: Color = .brown
-    
     var veryHighPriorityColor: Color
     var highPriorityColor: Color
     var mediumPriorityColor: Color
@@ -27,6 +22,14 @@ struct UserPreferencesLM {
         self.highPriorityColor = highPriorityColor
         self.mediumPriorityColor = mediumPriorityColor
         self.lowPriorityColor = lowPriorityColor
+    }
+    
+    init(from sm: UserPreferencesSM) {
+        self.init(
+            veryHighPriorityColor: Color(fromHex: sm.veryHighPriorityColor),
+            highPriorityColor: Color.init(fromHex: sm.highPriorityColor),
+            mediumPriorityColor: Color.init(fromHex: sm.mediumPriorityColor),
+            lowPriorityColor: Color.init(fromHex: sm.lowPriorityColor))
     }
     
     func getColorOfPriority(_ priorityLevel: Int) -> Color {

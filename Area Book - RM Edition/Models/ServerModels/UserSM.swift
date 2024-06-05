@@ -12,7 +12,7 @@ struct UserSM : Codable {
     var password: String
     var userId: Int
     var email: String
-    var googleCalendarId: String
+    var googleCalendarId: String?
     var dateJoined: String
     
     init(from lm: UserLM) {

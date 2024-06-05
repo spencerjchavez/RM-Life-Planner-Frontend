@@ -14,12 +14,15 @@ struct ContentView: View {
     @State private var calendarView: AnyView
     @State private var peopleView: AnyView
     @State private var settingsView: AnyView
+    @State private var loginView: AnyView
     @State private var focusedView: AnyView
+    @State private var authSubscriber: Any?
 
     init() {
-        let initialCalendarView = AnyView(CalendarView())
-        _focusedView = State(initialValue: initialCalendarView)
-        _calendarView = State(initialValue: initialCalendarView)
+        let initialLoginView = LoginView()
+        focusedView = AnyView(initialLoginView)
+        loginView = AnyView(initialLoginView)
+        _calendarView = State(initialValue: AnyView(CalendarView()))
         _settingsView = State(initialValue: AnyView(SettingsView()))
         _peopleView = State(initialValue: AnyView(SettingsView()))
         _desiresAndGoalsView = State(initialValue: AnyView(GeneralProgressView()))
@@ -35,7 +38,13 @@ struct ContentView: View {
                 toProfileView: focusProfileView)
         }
         .environmentObject(appManager)
-
+        .onAppear {
+            self.authSubscriber = appManager.$authentication.sink(receiveValue: { authentication in
+                if authentication != nil {
+                    focusDesiresAndGoalsView()
+                }
+            })
+        }
     }
     public func focusDesiresAndGoalsView() {
         focusedView = desiresAndGoalsView

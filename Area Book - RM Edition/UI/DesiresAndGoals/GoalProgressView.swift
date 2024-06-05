@@ -10,43 +10,38 @@ import SwiftUI
 
 struct GoalProgressView: View {
     
-    var goalName: String
+    var goal: GoalLM
     var amountAccomplished: Double
-    var amountPlanned: Double
-    var deadlineDate: Date?
     var accentColor: Color
     var backgroundColor: Color
 
-    init(goalName: String, amountAccomplished: Double, amountPlanned: Double, deadlineDate: Date?, accentColor: Color, backgroundColor: Color) {
-        self.goalName = goalName
+    init(goal: GoalLM, amountAccomplished: Double, accentColor: Color, backgroundColor: Color) {
+        self.goal = goal
         self.amountAccomplished = amountAccomplished
-        self.amountPlanned = amountPlanned
-        self.deadlineDate = deadlineDate
         self.accentColor = accentColor
         self.backgroundColor = backgroundColor
     }
     
     var body: some View {
-        HStack {
+        HStack (spacing: 0) {
             CircularProgressView(amountAccomplished: self.amountAccomplished,
-                                 amountPlanned: self.amountPlanned,
+                                 amountPlanned: self.goal.howMuch,
                                  accentColor: self.accentColor,
                                  backgroundColor: self.backgroundColor)
             .padding()
             // display percentage completed
-            Text("\(Int((100 * amountAccomplished / amountPlanned).rounded()))%")
+            Text("\(Int((100 * amountAccomplished / goal.howMuch).rounded()))%")
                 .fontWeight(.bold)
                 .font(.body)
             //display goal text
-            Spacer(minLength: 0)
-            Text(goalName.lowercased().replacingOccurrences(of: "i ", with: "I "))
+            Text(goal.name.lowercased().replacingOccurrences(of: "i ", with: "I "))
                 .font(.body)
-                .padding(3)
+                .padding(.leading, 5)
             Spacer(minLength: 0)
             Divider()
             VStack {
                 Text("Deadline:")
-                DeadlineText(self.deadlineDate)
+                DeadlineText(self.goal.deadlineDate)
             }
             .padding(.trailing)
         }

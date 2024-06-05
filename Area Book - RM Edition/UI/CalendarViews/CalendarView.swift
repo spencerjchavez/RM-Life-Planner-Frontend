@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    //@EnvironmentObject var appManager: RMLifePlannerManager
+    @EnvironmentObject var appManager: RMLifePlannerManager
     let calendarStyles = ["day", "week", "month"]
     @State var selectedOption = "day"
     @State var selectedIndex = 100
@@ -68,3 +68,5 @@ struct CalendarView: View {
         }
     }
 }
+
+

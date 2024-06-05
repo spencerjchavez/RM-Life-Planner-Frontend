@@ -25,7 +25,6 @@ struct CalendarEventModificationView: View, Hashable {
     @State var eventRepeatDays = [false, false, false, false, false, false, false]
     @State var eventRepeatInterval: Int = 1
     
-    @State var linkedGoalId: Int? //goalId
     @State var linkedTodoId: Int?
     
     @FocusState var titleIsFocused: Bool
@@ -40,7 +39,6 @@ struct CalendarEventModificationView: View, Hashable {
         self._eventDescription = State(initialValue: event.description ?? "")
         self._eventStartInstant = State(initialValue: event.startInstant)
         self._eventEndInstant = State(initialValue: event.endInstant)
-        self._linkedGoalId = State(initialValue: event.linkedGoalId)
         self._linkedTodoId = State(initialValue: event.linkedTodoId)
     }
     // create new event
@@ -75,7 +73,7 @@ struct CalendarEventModificationView: View, Hashable {
                     in: RoundedRectangle(cornerRadius: 15.0)
                 )
                 .backgroundStyle(Colors.coolMint)
-                .padding(20)
+                .padding(.vertical)
                 .onTapGesture {
                     titleIsFocused = false
                     descriptionIsFocused = false
@@ -92,13 +90,11 @@ struct CalendarEventModificationView: View, Hashable {
                     selection: $eventStartInstant,
                     displayedComponents: [.date, .hourAndMinute]
                 )
-                .padding(.horizontal)
                 DatePicker(
                     "To: ",
                     selection: $eventEndInstant,
                     displayedComponents: [.date, .hourAndMinute]
                 )
-                .padding(.horizontal)
                 HStack {
                     Text("Repeats: ")
                     Spacer()
@@ -148,7 +144,30 @@ struct CalendarEventModificationView: View, Hashable {
                         }
                     }
                 }
-                .padding(.horizontal)
+                // link to goal
+                HStack {
+                    Text("Link to Goal:")
+                    Spacer()
+                    Picker("Linked Goal", selection: $linkedTodoId) {
+                        Text("No Goal")
+                            .tag(nil as Int?)
+                        ForEach(appManager.todosManager.getLocalTodosInRange(eventStartInstant, eventEndInstant), id: \.self) { todo in
+                            Text(todo.name)
+                                .tag(todo.todoId as Int?)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                //attatch picture button
+                Button {
+                } label: {
+                    HStack {
+                        Image(systemName: "camera")
+                        Text("Share a Picture")
+                        Spacer()
+                    }
+                }
+                
                 HStack {
                     Button(action: cancel){
                         Text("Cancel")
@@ -186,13 +205,14 @@ struct CalendarEventModificationView: View, Hashable {
             }
             Spacer()
         }
+        .padding(.horizontal)
     }
     func getNthDayOfWeekStr(date: Date) -> String{
         let components = Calendar.current.dateComponents([.weekOfMonth], from: date)
         let numStr = components.weekOfMonth!.description + getNumberSuffix(x: components.weekOfMonth!)
-        var df = DateFormatter()
+        let df = DateFormatter()
         df.dateFormat = "EEEE" //Day of weeek full name
-        var dayStr = df.string(from: date)
+        let dayStr = df.string(from: date)
         return numStr + " " + dayStr
     }
     func getDayNumAsStr(date: Date) -> String {
@@ -222,14 +242,21 @@ struct CalendarEventModificationView: View, Hashable {
     }
     func submit() {
         // TODO: need to prompt if we edit future recurrences or not...
+        guard let authentication = appManager.authentication else {
+            ErrorManager.reportError(throwingFunction: "CalendarEventModificationView.submit()", loggingMessage: "nil authentication found", messageToUser: "Error: Please log in and try again.")
+            return
+        }
         if var event = event { // edit existing event
             event.name = eventTitle
             event.description = eventDescription
             event.startInstant = eventStartInstant
             event.endInstant = eventEndInstant
             event.duration = event.startInstant.distance(to: event.endInstant)
-            event.linkedGoalId = linkedGoalId
-            event.linkedTodoId = linkedTodoId
+            if let linkedTodoId = linkedTodoId {
+                event.linkedTodoId = linkedTodoId
+                // also attatch the goal id
+                event.linkedGoalId = appManager.todosManager.getLocalTodo(todoId: linkedTodoId)?.linkedGoalId
+            }
             event.recurrenceId = recurrenceId
             appManager.eventsManager.updateCalendarEvent(eventId: event.eventId, updatedCalendarEvent: event)
             navigationPath.removeLast() // removes self from navigation stack, popping us back to the previous view
@@ -238,12 +265,15 @@ struct CalendarEventModificationView: View, Hashable {
                 // create new recurrence
                 // TODO: make it possible to add end dates to recurrences
                 let rrule = RRuleComponents(pattern: eventRepeatPattern, startDate: eventStartInstant, endDate: nil, interval: eventRepeatInterval).toEKRecurrenceRule()
-                let recurrence = RecurrenceLM(userId: GlobalVars.authentication!.user_id, rrule: rrule, startInstant: eventStartInstant, eventName: eventTitle, eventDescription: eventDescription, eventDuration: eventStartInstant.distance(to: eventEndInstant))
-                appManager.recurrenceManager.create(recurrence)
-                // invalidate recurrence days to trigger reloading from server
+                let recurrence = RecurrenceLM(userId: authentication.user_id, rrule: rrule, startInstant: eventStartInstant, eventName: eventTitle, eventDescription: eventDescription, eventDuration: eventStartInstant.distance(to: eventEndInstant))
+                  // invalidate recurrence days to trigger reloading from server
                 appManager.eventsManager.invalidateEventsAfterDate(after: eventStartInstant)
             } else {
-                let event = CalendarEventLM(userId: GlobalVars.authentication!.user_id, name: eventTitle, description: eventDescription, startInstant: eventStartInstant, endInstant: eventEndInstant, linkedGoalId: linkedGoalId, linkedTodoId: linkedTodoId)
+                var linkedGoalId: Int? = nil
+                if let linkedTodoId = self.linkedTodoId {
+                    linkedGoalId = appManager.todosManager.getLocalTodo(todoId: linkedTodoId)?.linkedGoalId
+                }
+                let event = CalendarEventLM(userId: authentication.user_id, name: eventTitle, description: eventDescription, startInstant: eventStartInstant, endInstant: eventEndInstant, linkedGoalId: linkedGoalId, linkedTodoId: linkedTodoId)
                 appManager.eventsManager.createCalendarEvent(event: event)
                 navigationPath.removeLast()
             }

@@ -8,14 +8,10 @@
 import Foundation
 
 struct GlobalVars {
-    static var authentication: Authentication? = Authentication(user_id: 5, api_key: "fYlLepMbiadrVVkNIybcLiqGtQRjBKGtsGUouTyXkqyUAMkxPM")
-    static var authQueryItems: [URLQueryItem] = {
-        return [URLQueryItem(name: "auth_user", value: String(GlobalVars.authentication!.user_id)),
-                URLQueryItem(name: "api_key", value: GlobalVars.authentication!.api_key)]
-    }()
-    static var userPreferences: UserPreferencesLM = UserPreferencesLM(veryHighPriorityColor: Colors.priority1, highPriorityColor: Colors.priority2, mediumPriorityColor: Colors.priority3, lowPriorityColor: Colors.priority4)
+
+
     
-    static let BASE_URL = URL(string: "http://191.101.1.153/api")!
+    static let BASE_URL = URL(string: "http://localhost:8000/api")! //URL(string: "http://191.101.1.153/api")!
     static let USERS_URL = BASE_URL.appending(path: "/users")
     
     static let CALENDAR_EVENTS_URL = BASE_URL.appending(path: "/calendar/events")
@@ -34,14 +30,12 @@ struct GlobalVars {
     
     static let CALENDAR_RECURRENCES_URL = BASE_URL.appending(path: "/calendar/recurrences")
     
-    static let GOAL_ACHIEVING_URL = BASE_URL.appending(path: "/goal-achieving")
-    static let GOALS_URL = GOAL_ACHIEVING_URL.appending(path: "/goals")
+    static let DESIRES_URL = BASE_URL.appending(path: "/desires")
+    static let GOALS_URL = BASE_URL.appending(path: "/goals")
     static let GET_GOAL_BY_ID_URL = GOALS_URL.appending(path: "/by-event-id")
     static let GET_GOALS_IN_DATE_RANGE_URL = GOALS_URL.appending(path: "/in-date-range")
     static let GET_GOALS_IN_DATE_LIST_URL = GOALS_URL.appending(path: "/in-date-list")
-    
-    static let DESIRES_URL = GOAL_ACHIEVING_URL.appending(path: "/desires")
-    
+        
     static let TIMEOUT_INTERVAL = 2.0
     
     static let SUBSYSTEM_STR = "RM LIFE PLANNER"

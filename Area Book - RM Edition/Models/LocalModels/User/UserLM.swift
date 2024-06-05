@@ -13,13 +13,13 @@ struct UserLM {
     var password: String
     var userId: Int
     var email: String
-    var googleCalendarId: String
+    var googleCalendarId: String?
     var dateJoined: Date
     
     static func == (lhs: UserLM, rhs: UserLM) -> Bool {
         return lhs.username == rhs.username
     }
-    
+        
     init(from sm: UserSM) throws {
         self.username = sm.username
         self.password = sm.password

@@ -3,29 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "CalendarDayView.calculateEventRects(events:):CalendarDayView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in CalendarEventsManager.createCalendarEvent(event:):CalendarEventsManager.swift">
-      </ContextState>
-      <ContextState
-         contextName = "CalendarEventsManager.getLocalCalendarEventsInRange(_:_:userRequested:):CalendarEventsManager.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static CalendarEventServices.getByDates(_:):CalendarEventServices.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in CalendarDayView.body.getter:CalendarDayView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "CalendarEventsManager.getLocalCalendarEventsOnDates(_:userRequested:):CalendarEventsManager.swift">
-      </ContextState>
-      <ContextState
          contextName = "static JSONRetriever.getJson&lt;&#x3c4;_0_0&gt;(url:httpMethod:httpBodyToEncode:queryItems:):JSONRetriever.swift">
          <PersistentStrings>
             <PersistentString
@@ -34,13 +11,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in CalendarEventsManager.getLocalCalendarEventsOnDates(_:userRequested:):CalendarEventsManager.swift">
+         contextName = "closure #1 in CalendarEventsManager.createCalendarEvent(event:):CalendarEventsManager.swift">
       </ContextState>
       <ContextState
-         contextName = "CalendarEventsManager.getCalendarEventsOnDates(_:):CalendarEventsManager.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static JSONRetriever.getJson2&lt;&#x3c4;_0_0&gt;(url:httpMethod:httpBodyToEncode:queryItems:):JSONRetriever.swift">
+         contextName = "CalendarEventsManager.getLocalCalendarEventsOnDates(_:userRequested:):CalendarEventsManager.swift">
       </ContextState>
       <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in CalendarDayView.body.getter:CalendarDayView.swift">
@@ -52,6 +26,51 @@
                value = "yCoordinateByHour(10)">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static JSONRetriever.getJson2&lt;&#x3c4;_0_0&gt;(url:httpMethod:httpBodyToEncode:queryItems:):JSONRetriever.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static CalendarEventServices.create(_:):CalendarEventServices.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.">
+            </PersistentString>
+            <PersistentString
+               value = "JSONDecoder().decode([Any].self, from: data)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CalendarEventsManager.getLocalCalendarEventsInRange(_:_:userRequested:):CalendarEventsManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CalendarDayView.calculateEventRects(events:):CalendarDayView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in CalendarDayView.body.getter:CalendarDayView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CalendarEventsManager.getLocalCalendarEventsOnDates(_:userRequested:):CalendarEventsManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CalendarEventsManager.getCalendarEventsOnDates(_:):CalendarEventsManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in GeneralProgressView.body.getter:GeneralProgressView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "await ReportsManager(appManager: self.appManager).getWeekReport(startDate: Calendar.current.startOfDay(for: weekend.end))">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static CalendarEventServices.getByDates(_:):CalendarEventServices.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

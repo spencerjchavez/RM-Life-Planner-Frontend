@@ -35,3 +35,24 @@ struct Colors {
     static let priority5 = Color("PriorityColor5")
     static let priority6 = Color("PriorityColor6")
 }
+
+
+extension Color {
+    func hexString() -> String {
+        return self.description
+    }
+    
+    init(fromHex hex: String) {
+        var colorString = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        colorString = colorString.replacingOccurrences(of: "0x", with: "").uppercased()
+        let rIndex = colorString.startIndex
+        let gIndex = colorString.index(rIndex, offsetBy: 2)
+        let bIndex = colorString.index(gIndex, offsetBy: 2)
+
+        let red = Double("0x".appending(String(colorString[rIndex..<gIndex]))) ?? 0.0 / 255.0
+        let green = Double("0x".appending(String(colorString[gIndex..<bIndex]))) ?? 0.0 / 255.0
+        let blue = Double("0x".appending(String(colorString[bIndex..<colorString.endIndex]))) ?? 0.0 / 255.0
+        
+        self.init(red: red, green: green, blue: blue)
+    }
+}

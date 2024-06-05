@@ -7,38 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "38E3D561-1D94-42DC-8807-F47A2C4EF542"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Area Book - RM Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4869D324-76D8-4CF0-8DA3-66892921C4E2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Area Book - RM Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C7228562-AEC7-4F58-9BC0-EDD8DF807522"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,56 +14,8 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "getCalendarEventsOnDates(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C7228562-AEC7-4F58-9BC0-EDD8DF807522 - dec228b616645ac4"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Area_Book___RM_Edition.CalendarEventsManager.getCalendarEventsOnDates(Swift.Array&lt;Foundation.Date&gt;) async -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "892">
-               </Location>
-               <Location
-                  uuid = "C7228562-AEC7-4F58-9BC0-EDD8DF807522 - dec228b616645ac4"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Area_Book___RM_Edition.CalendarEventsManager.getCalendarEventsOnDates(Swift.Array&lt;Foundation.Date&gt;) async -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "1160">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "428E2D45-1363-437A-BF54-BF5058316DDE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "getCalendarEventsOnDates(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,42 +30,10 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "getCalendarEventsOnDates(_:)"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "getCalendarEventsByGoalIds(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "72964516-DC6A-42B6-8ED4-73ABE6FF361D - dec228b616645ffe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Area_Book___RM_Edition.CalendarEventsManager.getCalendarEventsOnDates(Swift.Array&lt;Foundation.Date&gt;) async -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
-                  offsetFromSymbolStart = "4696">
-               </Location>
-               <Location
-                  uuid = "72964516-DC6A-42B6-8ED4-73ABE6FF361D - dec228b616645ffe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Area_Book___RM_Edition.CalendarEventsManager.getCalendarEventsOnDates(Swift.Array&lt;Foundation.Date&gt;) async -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
-                  offsetFromSymbolStart = "4680">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -158,57 +46,10 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "getLocalCalendarEventsOnDates(_:userRequested:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B3404712-9548-417D-B359-64B5B9240271 - f7777d76de76b53b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsOnDates(_: Swift.Array&lt;Foundation.Date&gt;, userRequested: Swift.Bool) -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "2852">
-               </Location>
-               <Location
-                  uuid = "B3404712-9548-417D-B359-64B5B9240271 - f7765d35507401a5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; () in Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsOnDates(_: Swift.Array&lt;Foundation.Date&gt;, userRequested: Swift.Bool) -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "B3404712-9548-417D-B359-64B5B9240271 - 102d961e7d5e620a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsOnDates(_: Swift.Array&lt;Foundation.Date&gt;, userRequested: Swift.Bool) -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -221,58 +62,10 @@
             filePath = "Area Book - RM Edition/Services/calendar/CalendarEventServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "getByDateRange(_:_:)"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "getByDateRange(_:_:authentication:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "52713EE0-5413-4801-9FF3-B6B4D90DAC84"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Area Book - RM Edition/Services/calendar/CalendarEventServices.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "getByDates(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "52713EE0-5413-4801-9FF3-B6B4D90DAC84 - 3eba334199ca72c9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for static Area_Book___RM_Edition.CalendarEventServices.getByDates(Swift.Array&lt;Swift.String&gt;) async throws -&gt; Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventSM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Services/calendar/CalendarEventServices.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "52713EE0-5413-4801-9FF3-B6B4D90DAC84 - 3eba334199ca72c9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for static Area_Book___RM_Edition.CalendarEventServices.getByDates(Swift.Array&lt;Swift.String&gt;) async throws -&gt; Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventSM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Services/calendar/CalendarEventServices.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "220">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -285,25 +78,9 @@
             filePath = "Area Book - RM Edition/Services/calendar/CalendarEventServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "getByDates(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "74A6FA37-A941-4539-B954-2CE906E81A87"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "getLocalCalendarEventsOnDates(_:userRequested:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -317,42 +94,10 @@
             filePath = "Area Book - RM Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "calculateEventRects(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "37DE3DB1-C08B-4E88-8989-DD7926E10FD1 - ba016b8969e35b5b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarDayView.calculateEventRects(events: Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;) -&gt; ()"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "155"
-                  endingLineNumber = "155"
-                  offsetFromSymbolStart = "2072">
-               </Location>
-               <Location
-                  uuid = "37DE3DB1-C08B-4E88-8989-DD7926E10FD1 - ba016b8969e35adf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarDayView.calculateEventRects(events: Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;) -&gt; ()"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
-                  offsetFromSymbolStart = "1368">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -365,8 +110,8 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "getLocalCalendarEventsOnDates(_:userRequested:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -381,8 +126,8 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "createCalendarEvent(event:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -413,8 +158,8 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "getLocalCalendarEventsOnDates(_:userRequested:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -429,42 +174,10 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "getLocalCalendarEventsOnDates(_:userRequested:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "30C1E018-3F54-46AC-87A1-64AA2DD0601A - f7777d76de76b7ac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsOnDates(_: Swift.Array&lt;Foundation.Date&gt;, userRequested: Swift.Bool) -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "2200">
-               </Location>
-               <Location
-                  uuid = "30C1E018-3F54-46AC-87A1-64AA2DD0601A - f7777d76de76b7ac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsOnDates(_: Swift.Array&lt;Foundation.Date&gt;, userRequested: Swift.Bool) -&gt; Swift.Dictionary&lt;Foundation.Date, Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "2304">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -477,42 +190,10 @@
             filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "getLocalCalendarEventsInRange(_:_:userRequested:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "37057619-246B-4444-9D42-2D1D3C5219C3 - 79801fac326a82ed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsInRange(_: Foundation.Date, _: Foundation.Date, userRequested: Swift.Bool) -&gt; Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "1220">
-               </Location>
-               <Location
-                  uuid = "37057619-246B-4444-9D42-2D1D3C5219C3 - 79801fac326a8104"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.CalendarEventsManager.getLocalCalendarEventsInRange(_: Foundation.Date, _: Foundation.Date, userRequested: Swift.Bool) -&gt; Swift.Array&lt;Area_Book___RM_Edition.CalendarEventLM&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Managers/Calendar/CalendarEventsManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "1696">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -545,53 +226,6 @@
             endingLineNumber = "51"
             landmarkName = "init(from:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D0C67112-5043-4E52-BEF8-000817392C59 - e76b61740e3fcb94"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.RecurrenceSM.init(from: Area_Book___RM_Edition.RecurrenceLM) -&gt; Area_Book___RM_Edition.RecurrenceSM"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Models/ServerModels/Calendar/RecurrenceSM.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "1356">
-               </Location>
-               <Location
-                  uuid = "D0C67112-5043-4E52-BEF8-000817392C59 - eae23fc4c81e4218"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.RecurrenceSM.init(from: Area_Book___RM_Edition.RecurrenceLM) throws -&gt; Area_Book___RM_Edition.RecurrenceSM"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Models/ServerModels/Calendar/RecurrenceSM.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "1432">
-               </Location>
-               <Location
-                  uuid = "D0C67112-5043-4E52-BEF8-000817392C59 - eae23fc4c81e43fb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Area_Book___RM_Edition.RecurrenceSM.init(from: Area_Book___RM_Edition.RecurrenceLM) throws -&gt; Area_Book___RM_Edition.RecurrenceSM"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Models/ServerModels/Calendar/RecurrenceSM.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "1536">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -613,22 +247,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "849317B7-12F2-4873-9E54-1AD286A27D98"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Area Book - RM Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A50114BE-EAD8-464F-9505-AEF1B649F556"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -640,68 +258,646 @@
             endingLineNumber = "19"
             landmarkName = "getJson(url:httpMethod:queryItems:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A50114BE-EAD8-464F-9505-AEF1B649F556 - 3fc32f7149b2f24b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for static Area_Book___RM_Edition.JSONRetriever.getJson(url: Foundation.URL, httpMethod: Swift.String, queryItems: Swift.Optional&lt;Swift.Array&lt;Foundation.URLQueryItem&gt;&gt;) async throws -&gt; Swift.Dictionary&lt;Swift.String, Any&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Services/JSONRetriever.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "572">
-               </Location>
-               <Location
-                  uuid = "A50114BE-EAD8-464F-9505-AEF1B649F556 - 655057bcd5e1d356"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for static Area_Book___RM_Edition.JSONRetriever.getJson(url: Foundation.URL, httpMethod: Swift.String, queryItems: Swift.Optional&lt;Swift.Array&lt;Foundation.URLQueryItem&gt;&gt;) async throws -&gt; Swift.Dictionary&lt;Swift.String, Any&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Services/JSONRetriever.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "A50114BE-EAD8-464F-9505-AEF1B649F556 - 905126b785e07a77"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for static Area_Book___RM_Edition.JSONRetriever.getJson(url: Foundation.URL, httpMethod: Swift.String, queryItems: Swift.Optional&lt;Swift.Array&lt;Foundation.URLQueryItem&gt;&gt;) async throws -&gt; Swift.Dictionary&lt;Swift.String, Any&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Services/JSONRetriever.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "A50114BE-EAD8-464F-9505-AEF1B649F556 - b8e8229b5a073e71"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for static Area_Book___RM_Edition.JSONRetriever.getJson(url: Foundation.URL, httpMethod: Swift.String, queryItems: Swift.Optional&lt;Swift.Array&lt;Foundation.URLQueryItem&gt;&gt;) async throws -&gt; Swift.Dictionary&lt;Swift.String, Any&gt;"
-                  moduleName = "Area Book - RM Edition"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spencerchavez/Documents/Area%20Book%20-%20RM%20Edition/Area%20Book%20-%20RM%20Edition/Services/JSONRetriever.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "555243E2-E0F2-4799-B48B-9E31C789E896"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "getCalendarEventsOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E589155F-8721-4729-9052-B97B43C552F0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "getCalendarEventsOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9AFC27A9-A7BE-40E7-BEDA-D025A775622D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Services/calendar/CalendarEventServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "getByDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4EAEAEBA-900D-4638-89F7-259EA9368D64"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Services/JSONRetriever.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getJson(url:httpMethod:httpBodyToEncode:queryItems:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2503236C-09F9-4D24-90A0-C5802E002166"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Services/calendar/CalendarEventServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "create(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "62F11524-BE6A-481D-A2BC-D33B550E5E0E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Services/JSONRetriever.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "getJson(url:httpMethod:queryItems:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F182879-85E8-435F-A49A-F23DE8C230BA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Services/JSONRetriever.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "getJson(url:httpMethod:httpBodyToEncode:queryItems:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D809E4B6-B869-45E6-B6BC-9B72E80CEDC8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "getCalendarEventsByGoalIds(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1BF3B347-59FD-4211-8640-56BCC028F2AA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "getGoalsOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "42FF4CA9-A9A2-41DD-99C4-FDC81DB00A91"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "updateGoal(goalId:updatedGoal:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E550ECA4-710D-47A7-882D-1312482A7050"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "getGoalsInRange(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B99B84C7-C1E7-435A-8E0E-47606B863FBA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/UI/DesiresAndGoals/EditGoalView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2188B75D-71DF-43D0-8D20-860F0129A859"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/ReportsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "createReport(startDate:endDate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEA3FEB7-D63C-48CB-A845-6C255E4AB088"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/CalendarEventsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "getCalendarEventsByGoalIds(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "455BA7FD-D586-45FD-BFAC-B45D29F3BD58"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/ReportsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "createReport(startDate:endDate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "83EFF37C-2B33-4313-841B-A12E7AB90047"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/ReportsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "createWeekReport(startDate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E0682A24-ACF7-446C-B399-A39B77740C86"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Models/GoalAchievingReport.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "init(startDate:endDate:desires:goals:todosByGoalId:eventsByGoalId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C08AB7C5-BDF2-4DBF-8C33-9503D664FE29"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "getLocalGoalsInRange(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9903894E-5BED-4B50-9499-4882BD7C68C4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "getGoalsInRange(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BDE54B3-4A6F-4D34-806F-CAA96220D999"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "createGoal(goal:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AB645EF8-32F1-4C77-BB7D-5CEED2404902"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "getGoalsOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E395AA08-688F-494C-AAA3-22DE4D3274DE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "getLocalGoalsOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA3BAF57-D14E-4E07-9321-74C3CDD35208"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "getLocalGoalsOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9D87794-AC61-4094-844E-4F355C4C8E21"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/GoalAchieving/GoalsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "getLocalGoalsInRange(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28EDDA52-38FC-4D2C-90B5-909EF3DE5E3B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/UI/DesiresAndGoals/WeekProgressView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4B94E994-0E7A-4D3A-B91A-0D803A74A79B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "createTodo(todo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1372AFC7-DF29-429A-9207-61A3F17279CA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Services/calendar/TodoServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "create(_:authentication:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A6154E90-F6B8-407E-928F-6AD058742F74"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "getLocalTodosInRange(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6094D683-3A77-42AF-8487-E3B8C8B72483"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "getLocalTodosOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C3642955-3EF7-4457-82AB-FA77F17F9666"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "getLocalTodosOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5556145E-CD7D-49B0-BCA3-BBD21B151DB7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "getTodosOnDates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "183FC851-5B71-4D15-8C42-C61C9FFB23C1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "getTodosInRange(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CFBFD575-82AA-4C68-9508-28699F037A49"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "getTodosByGoalIds(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0FCB67CD-15AA-4BB4-8524-01256F23355C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Managers/Calendar/TodosManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "getTodosByGoalIds(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "679A6E27-6668-44BC-9130-9BCC2530C26A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/UI/Todos/TodosProgressView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(todos:eventsByTodoId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F9F13BAC-6B55-406F-9974-9ED7CFAC537A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B426B9D-E83E-4F8C-BE8F-972D3EE232AE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/UI/CalendarViews/CalendarDisplayTypes/CalendarDayView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12BDC7DA-DB47-4F54-B652-C4C48F443F82"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/UI/Todos/TodosProgressView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0D7B6FD-6D8E-49FC-ACED-9F065FA66424"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Data/Colors.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "init(fromHex:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C3D02DD-B8B4-4639-AE5A-E11BDF34AFC6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Area Book - RM Edition/Data/Colors.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "hexString()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
